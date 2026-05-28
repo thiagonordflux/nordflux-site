@@ -1,0 +1,882 @@
+/*
+ * NordFlux Design System — Colors & Typography
+ * ═══════════════════════════════════════════════════════════════
+ * 3-Layer Token Architecture
+ *
+ * Layer 1 — PRIMITIVES
+ *   Raw values. Never referenced directly by components.
+ *   Prefixed: --primitive-*
+ *
+ * Layer 2 — SEMANTICS
+ *   What tokens mean. Swapped per [data-theme] + [data-mode].
+ *   Prefixed: --bg-*, --fg-*, --color-*, --border-*, --shadow-*
+ *
+ * Layer 3 — COMPONENT TOKENS
+ *   Reference semantics only. Live in each component's CSS.
+ *   e.g. .btn-primary { background: var(--color-accent); }
+ *
+ * Usage:
+ *   <html data-theme="nordflux" data-mode="dark">  (default)
+ *   <html data-theme="nordflux" data-mode="light">
+ *   <html data-theme="blue"     data-mode="dark">
+ *   <html data-theme="blue"     data-mode="light">
+ *
+ * Themes planned: nordflux · blue · [future]
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ─── Google Fonts (only families not available locally) ────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Montserrat Alternates — Display / Logo / Headings ─────
+   Full weight range (Thin 100 → Black 900), upright + italic.
+   Variable font not yet available; static cuts provided.
+   ─────────────────────────────────────────────────────────── */
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Thin.ttf') format('truetype'); font-weight:100; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-ThinItalic.ttf') format('truetype'); font-weight:100; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-ExtraLight.ttf') format('truetype'); font-weight:200; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-ExtraLightItalic.ttf') format('truetype'); font-weight:200; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-LightItalic.ttf') format('truetype'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Italic.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-MediumItalic.ttf') format('truetype'); font-weight:500; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-SemiBoldItalic.ttf') format('truetype'); font-weight:600; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-BoldItalic.ttf') format('truetype'); font-weight:700; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-ExtraBold.ttf') format('truetype'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-ExtraBoldItalic.ttf') format('truetype'); font-weight:800; font-style:italic; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-Black.ttf') format('truetype'); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat Alternates'; src:url('../fonts/MontserratAlternates-BlackItalic.ttf') format('truetype'); font-weight:900; font-style:italic; font-display:swap; }
+
+/* ─── Source Sans 3 — Body / Marketing copy ─────────────────
+   Variable fonts (upright + italic) cover full weight range.
+   ─────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../fonts/SourceSans3-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../fonts/SourceSans3-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Cormorant Garamond — Brand tagline / accent ────────────
+   Replaces Barlow (Google Fonts substitute). Variable fonts used
+   for full weight range; static cuts provided as fallbacks.
+   ─────────────────────────────────────────────────────────── */
+
+/* Variable — upright */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variable — italic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Static fallbacks — upright */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Static fallbacks — italic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 1 — PRIMITIVES
+   Raw palette values. Never use these in components directly.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ── Copper palette ──────────────────────────────────────── */
+  --primitive-copper-900: #8B4430;
+  --primitive-copper-800: #A0523A;
+  --primitive-copper-700: #BA745F;
+  --primitive-copper-600: #C17C5E;
+  --primitive-copper-500: #C6886E;
+  --primitive-copper-400: #C99383;
+  --primitive-copper-300: #D4956F;
+  --primitive-copper-200: #E0B090;
+  --primitive-copper-100: #F0D8C8;
+
+  /* ── Electric Blue palette ───────────────────────────────── */
+  --primitive-blue-950:   #060B18;
+  --primitive-blue-900:   #0B1530;
+  --primitive-blue-800:   #0F2060;
+  --primitive-blue-700:   #1440B0;
+  --primitive-blue-600:   #1A5FFF;   /* Core electric blue */
+  --primitive-blue-500:   #3D7EFF;
+  --primitive-blue-400:   #6699FF;
+  --primitive-blue-300:   #99BBFF;
+  --primitive-blue-200:   #C2D6FF;
+  --primitive-blue-100:   #E0EBFF;
+
+  /* ── Dark navy (shared across dark themes) ───────────────── */
+  --primitive-navy-950:   #020617;
+  --primitive-navy-900:   #080F22;
+  --primitive-navy-875:   #13192C;  /* Dark panel — Figma rgb(19,25,44) */
+  --primitive-navy-850:   #0F172A;  /* Card/surface — Figma rgb(15,23,42) */
+  --primitive-navy-800:   #222831;
+  --primitive-navy-700:   #2A3040;
+  --primitive-navy-600:   #474F59;
+  --primitive-navy-500:   #59626A;
+  --primitive-navy-400:   #A0AEC0;
+  --primitive-navy-300:   #CBD5E0;
+  --primitive-navy-200:   #E2E8F0;
+
+  /* ── Warm neutrals (NordFlux light mode) ─────────────────── */
+  --primitive-warm-950:   #1C1410;
+  --primitive-warm-900:   #2E2420;
+  --primitive-warm-800:   #4A3F38;
+  --primitive-warm-700:   #6B5C52;
+  --primitive-warm-600:   #8C7B6E;
+  --primitive-warm-500:   #B0A49C;
+  --primitive-warm-400:   #CEC5BE;
+  --primitive-warm-300:   #E2DAD4;
+  --primitive-warm-200:   #F0EBE6;
+  --primitive-warm-100:   #F8F4F0;
+  --primitive-warm-50:    #FDF9F7;
+
+  /* ── Cool neutrals (Electric Blue light mode) ────────────── */
+  --primitive-cool-950:   #0F172A;
+  --primitive-cool-900:   #1E293B;
+  --primitive-cool-800:   #334155;
+  --primitive-cool-700:   #475569;
+  --primitive-cool-600:   #64748B;
+  --primitive-cool-500:   #94A3B8;
+  --primitive-cool-400:   #CBD5E1;
+  --primitive-cool-300:   #E2E8F0;
+  --primitive-cool-200:   #F1F5F9;
+  --primitive-cool-100:   #F8FAFC;
+  --primitive-cool-50:    #FFFFFF;
+
+  /* ── Sky blue (Flux product UI accent — Figma) ─────────────── */
+  --primitive-sky-600:    #0284C7;
+  --primitive-sky-500:    #0EA5E9;  /* Figma rgb(14,165,233) — 75× */
+  --primitive-sky-400:    #38BDF8;  /* Figma rgb(56,189,248) — 39× */
+  --primitive-sky-300:    #7DD3FC;
+
+  /* ── Categorical: scope + health-mode (theme-independent) ─── */
+  /* These are data identifiers, not UI chrome — same value across all 4 themes */
+  --primitive-scope-tactical:          #f59e0b;  /* amber */
+  --primitive-scope-operational:       #10b981;  /* emerald */
+  --primitive-scope-indigo:            #6366f1;  /* indigo — health-mode goal badge */
+
+  /* ── Status (shared across all themes) ───────────────────── */
+  --primitive-success:    #4ADE80;
+  --primitive-success-em: #34D399;  /* Figma rgb(52,211,153) — LED green */
+  --primitive-success-hi: #57D89D;  /* Figma rgb(87,216,157) — bright LED */
+  --primitive-success-ui: #10b981;  /* emerald — badge/dot UI (status-good) */
+  --primitive-warning:    #FBBF24;
+  --primitive-warning-ui: #f59e0b;  /* amber — badge/dot UI (status-warning) */
+  --primitive-error:      #F87171;
+  --primitive-error-em:   #F43F5E;  /* Figma rgb(244,63,94) — rose variant */
+  --primitive-error-ui:   #ef4444;  /* red — badge/dot UI (status-critical) */
+  --primitive-info:       #60A5FA;
+
+  /* ── Typography (invariant) ──────────────────────────────── */
+  --font-display:         'Montserrat Alternates', 'Montserrat', sans-serif;
+  --font-body:            'Source Sans 3', 'Montserrat', sans-serif;
+  --font-ui:              'Inter', 'Source Sans 3', sans-serif;  /* Product UI — Flux, QALab */
+  --font-tagline:         'Cormorant Garamond', serif;  /* Brand tagline — replaces Barlow substitute */
+  --font-mono:            'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Font size scale — extended with compact-UI sizes from missing-tokens.md */
+  --text-2xs:             9px;    /* Dense categorical badges */
+  --text-xxs:             10px;   /* Column headers, stage badges, sidebar tagline */
+  --text-xs:              11px;
+  --text-xs-mid:          12px;   /* Most-used compact body: tables, forms, inputs (~30 uses) */
+  --text-sm:              13px;
+  --text-sm-mid:          14px;   /* Stage name headers, tactical labels */
+  --text-md-sm:           15px;   /* Feature names, ComingSoon */
+  --text-base:            16px;
+  --text-md:              18px;
+  --text-lg:              20px;
+  --text-xl-sm:           22px;   /* Between lg and xl — TenantSelectPage heading */
+  --text-xl:              24px;
+  --text-2xl:             30px;
+  --text-3xl:             36px;
+  --text-4xl:             48px;
+  --text-5xl:             64px;
+  --text-6xl:             80px;
+
+  --leading-tight:        1.1;
+  --leading-snug:         1.25;
+  --leading-normal:       1.5;
+  --leading-relaxed:      1.65;
+
+  --tracking-tight:       -0.03em;
+  --tracking-normal:      0em;
+  --tracking-loose:       0.04em;  /* Monospace input code fields */
+  --tracking-wide:        0.05em;
+  --tracking-ui:          0.06em;  /* Uppercase section labels — most impactful */
+  --tracking-badge:       0.07em;  /* Badge and chip text */
+  --tracking-wider:       0.1em;
+  --tracking-widest:      0.2em;
+
+  /* ── Spacing (invariant, base-8 + compact-UI in-betweens) ── */
+  --space-0-5:            2px;   /* Micro padding on icon-only buttons */
+  --space-0-75:           3px;   /* Pagination button vertical padding */
+  --space-1:              4px;
+  --space-1-25:           5px;   /* Chip/tag row gap, compact button vertical padding */
+  --space-1-5:            6px;   /* Most-used non-standard gap (~15 uses in admin) */
+  --space-1-75:           7px;   /* Primary form button vertical padding */
+  --space-2:              8px;
+  --space-2-25:           9px;   /* Sidebar nav item vertical padding */
+  --space-2-5:            10px;  /* Compact section padding, StagesPanel header */
+  --space-3:              12px;
+  --space-3-5:            14px;  /* Horizontal padding on cancel/secondary buttons */
+  --space-4:              16px;
+  --space-5:              20px;
+  --space-6:              24px;
+  --space-7:              28px;
+  --space-8:              32px;
+  --space-10:             40px;
+  --space-12:             48px;
+  --space-16:             64px;
+  --space-20:             80px;
+  --space-24:             96px;
+
+  /* ── Corner Radii (invariant) ────────────────────────────── */
+  --radius-xs:            2px;
+  --radius-sm:            4px;
+  --radius-button:        6px;   /* Sidebar nav items, interactive elements between sm/md */
+  --radius-md:            8px;
+  --radius-card-sm:       12px;  /* IndicatorForm health chips, segmented controls */
+  --radius-pill:          10px;  /* Indicator chips, badge tags in StagesPanel */
+  --radius-lg:            16px;
+  --radius-xl:            24px;
+  --radius-full:          9999px;
+
+  /* ── Transitions (invariant) ─────────────────────────────── */
+  --transition-fast:      150ms ease;
+  --transition-base:      200ms ease;
+  --transition-slow:      350ms ease;
+
+  /* ── Layout shell (invariant) ────────────────────────────── */
+  /* Shell geometry — derived from flux-screens.html prototype */
+  --layout-sidebar-width:     220px;   /* Sidebar fixed width */
+  --layout-topbar-height:      56px;   /* Topbar fixed height */
+  --layout-content-padding:    24px;   /* = --space-6; main content inset */
+  --layout-max-width:        1440px;   /* Page cap for ultra-wide displays */
+
+  /* Panel widths — admin split-view side panels */
+  --layout-panel-sm:          260px;   /* JourneyList, narrow list panels */
+  --layout-panel-md:          280px;   /* IndicatorForm, SnapshotPanel */
+  --layout-panel-lg:          320px;   /* IndicatorPicker (was 300px — rounded to base-8) */
+
+  /* Section spacing — dashboard stacked levels */
+  --layout-section-gap:        28px;   /* = --space-7; Strategic/Tactical/Operational gap */
+
+  /* Breakpoints — desktop-first collapse points */
+  /* Use as @media (max-width: var(--bp-*)) in component CSS */
+  --bp-sm:                    480px;   /* Sidebar hides, hamburger appears */
+  --bp-md:                    768px;   /* Sidebar collapses to icon-only */
+  --bp-lg:                   1024px;   /* Full sidebar, single-column admin */
+  --bp-xl:                   1280px;   /* Design target: full 3-panel admin */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 2 — SEMANTICS
+   One block per [theme × mode]. Components only touch these.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── THEME: NordFlux · Mode: Dark (default) ─────────────────────
+   Deep navy backgrounds, copper accents, warm foreground text.
+   ─────────────────────────────────────────────────────────────── */
+:root,
+[data-theme="nordflux"][data-mode="dark"] {
+
+  --bg-primary:       var(--primitive-navy-950);
+  --bg-secondary:     var(--primitive-navy-800);
+  --bg-tertiary:      var(--primitive-navy-600);
+  --bg-overlay:       rgba(2, 6, 23, 0.85);
+  --bg-elevated:      var(--primitive-navy-700);
+  --bg-card:          var(--primitive-navy-800);  /* #222831 — matches index.html bgSecondary; cards across themes resolve here */
+  --bg-panel:         var(--primitive-navy-875);  /* #13192C — Figma dark panel */
+  --bg-track:         rgba(226, 232, 240, 0.08);  /* Sub-card track (progress bars, sliders) — readable against --bg-card */
+
+  --fg-primary:       var(--primitive-navy-200);
+  --fg-secondary:     var(--primitive-navy-400);
+  --fg-muted:         var(--primitive-navy-500);
+  --fg-muted-ui:      #6C6E7F;  /* Figma rgb(108,110,127) — 443× — UI secondary text */
+  --fg-stroke:        #94A3B8;  /* Figma rgb(148,163,184) — 132× — borders/dividers */
+  --fg-inverse:       var(--primitive-navy-950);
+  --fg-on-accent:     #FFFFFF;
+
+  --color-accent:     var(--primitive-copper-600);
+  --color-accent-dim: var(--primitive-copper-900);
+  --color-accent-hi:  var(--primitive-copper-300);
+  --color-accent-subtle: rgba(193, 124, 94, 0.12);
+
+  --color-brand:      var(--primitive-copper-600);
+  --color-brand-dim:  var(--primitive-copper-900);
+  --color-brand-hi:   var(--primitive-copper-300);
+
+  --color-success:    var(--primitive-success);
+  --color-success-em: var(--primitive-success-em); /* LED green — Figma */
+  --color-success-ui: var(--primitive-success-ui); /* emerald badge/dot */
+  --color-warning:    var(--primitive-warning);
+  --color-warning-ui: var(--primitive-warning-ui); /* amber badge/dot */
+  --color-error:      var(--primitive-error);
+  --color-error-em:   var(--primitive-error-em);   /* Rose — Figma */
+  --color-error-ui:   var(--primitive-error-ui);   /* red badge/dot */
+  --color-info:       var(--primitive-info);
+  --color-sky:        var(--primitive-sky-500);    /* #0EA5E9 — Flux UI sky */
+  --color-sky-hi:     var(--primitive-sky-400);    /* #38BDF8 — Flux selected state */
+
+  /* ── Scope (categorical — same across all themes) ─────────── */
+  --color-scope-strategic:            var(--color-accent-hi);
+  --color-scope-strategic-subtle:     var(--color-accent-subtle);
+  --color-scope-tactical:             var(--primitive-scope-tactical);
+  --color-scope-tactical-subtle:      rgba(245, 158, 11, 0.12);
+  --color-scope-operational:          var(--primitive-scope-operational);
+  --color-scope-operational-subtle:   rgba(16, 185, 129, 0.12);
+
+  /* ── Health mode badges (categorical) ─────────────────── */
+  --color-health-goal:                var(--primitive-scope-indigo);
+  --color-health-goal-subtle:         rgba(99, 102, 241, 0.12);
+  --color-health-goal-border:         rgba(99, 102, 241, 0.30);
+  --color-health-goal-tint:           rgba(99, 102, 241, 0.06);
+  --color-health-threshold:           var(--primitive-scope-tactical);
+  --color-health-threshold-border:    rgba(245, 158, 11, 0.30);
+  --color-health-threshold-tint:      rgba(245, 158, 11, 0.06);
+
+  /* ── Status-indicator labels (badge level — distinct from LED) ─ */
+  --color-status-good:                var(--primitive-success-ui);
+  --color-status-warning:             var(--primitive-warning-ui);
+  --color-status-critical:            var(--primitive-error-ui);
+
+  /* ── Alert component tints ───────────────────────────── */
+  --color-success-tint-bg:            rgba(34, 197, 94, 0.10);
+  --color-success-tint-border:        rgba(34, 197, 94, 0.40);
+  --color-success-tint-text:          #bbf7d0;
+  --color-error-tint-bg:              rgba(239, 68, 68, 0.10);
+  --color-error-tint-border:          rgba(239, 68, 68, 0.45);
+  --color-error-tint-text:            #fecaca;
+  --color-info-tint-bg:               rgba(59, 130, 246, 0.10);
+  --color-info-tint-border:           rgba(59, 130, 246, 0.40);
+  --color-info-tint-text:             #bfdbfe;
+  --color-warning-tint-bg:            rgba(234, 179, 8, 0.10);
+  --color-warning-tint-border:        rgba(234, 179, 8, 0.40);
+  --color-warning-tint-text:          #fef3c7;
+
+  /* ── Surface interaction ─────────────────────────────── */
+  --bg-hover:                         rgba(226, 232, 240, 0.04);
+
+  --border-subtle:    rgba(226, 232, 240, 0.06);
+  --border-default:   rgba(226, 232, 240, 0.12);
+  --border-strong:    rgba(226, 232, 240, 0.24);
+  --border-accent:    rgba(193, 124, 94, 0.35);
+  --border-focus:     rgba(193, 124, 94, 0.60);
+
+  --shadow-xs:        0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm:        0 2px 4px rgba(139, 68, 48, 0.15), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:        0 4px 16px rgba(139, 68, 48, 0.15), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg:        0 8px 32px rgba(139, 68, 48, 0.2), 0 4px 8px rgba(0, 0, 0, 0.35);
+  --shadow-glow:      0 0 24px rgba(193, 124, 94, 0.35);
+  --shadow-accent:    0 8px 16px rgba(160, 82, 58, 0.2), 0 2px 4px rgba(139, 68, 48, 0.3);
+
+  --gradient-accent:  linear-gradient(135deg, #8B4430 0%, #D4956F 50%, #C17C5E 100%);
+  --gradient-accent-h: linear-gradient(90deg, #8B4430 0%, #D4956F 60%, #C6886E 100%);
+  --gradient-surface: linear-gradient(135deg, rgba(34,40,49,0.95) 0%, rgba(2,6,23,0.98) 100%);
+  --gradient-overlay: linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%);
+}
+
+
+/* ── THEME: NordFlux · Mode: Light ──────────────────────────────
+   Warm off-white backgrounds, copper accents, dark warm text.
+   ─────────────────────────────────────────────────────────────── */
+[data-theme="nordflux"][data-mode="light"] {
+
+  --bg-primary:       var(--primitive-warm-50);
+  --bg-secondary:     var(--primitive-warm-100);
+  --bg-tertiary:      var(--primitive-warm-200);
+  --bg-overlay:       rgba(253, 249, 247, 0.90);
+  --bg-elevated:      #FFFFFF;
+  --bg-card:          #FFFFFF;
+  --bg-panel:         var(--primitive-warm-100);
+  --bg-track:         rgba(15, 23, 42, 0.10);  /* Sub-card track — readable against white cards */
+
+  --fg-primary:       var(--primitive-warm-950);
+  --fg-secondary:     var(--primitive-warm-800);
+  --fg-muted:         var(--primitive-warm-600);
+  --fg-muted-ui:      var(--primitive-warm-700);
+  --fg-stroke:        var(--primitive-warm-500);
+  --fg-inverse:       var(--primitive-warm-50);
+  --fg-on-accent:     #FFFFFF;
+
+  --color-accent:     var(--primitive-copper-600);
+  --color-accent-dim: var(--primitive-copper-800);
+  --color-accent-hi:  var(--primitive-copper-700);
+  --color-accent-subtle: rgba(193, 124, 94, 0.10);
+
+  --color-brand:      var(--primitive-copper-600);
+  --color-brand-dim:  var(--primitive-copper-800);
+  --color-brand-hi:   var(--primitive-copper-700);
+
+  --color-success:    #16A34A;
+  --color-success-em: #16A34A;
+  --color-success-ui: #16A34A;
+  --color-warning:    #D97706;
+  --color-warning-ui: #D97706;
+  --color-error:      #DC2626;
+  --color-error-em:   #DC2626;
+  --color-error-ui:   #DC2626;
+  --color-info:       #2563EB;
+  --color-sky:        var(--primitive-sky-600);
+  --color-sky-hi:     var(--primitive-sky-500);
+
+  /* ── Scope (categorical) ──────────────────────────────── */
+  --color-scope-strategic:            var(--color-accent-hi);
+  --color-scope-strategic-subtle:     var(--color-accent-subtle);
+  --color-scope-tactical:             var(--primitive-scope-tactical);
+  --color-scope-tactical-subtle:      rgba(245, 158, 11, 0.12);
+  --color-scope-operational:          var(--primitive-scope-operational);
+  --color-scope-operational-subtle:   rgba(16, 185, 129, 0.12);
+
+  /* ── Health mode badges ──────────────────────────────── */
+  --color-health-goal:                var(--primitive-scope-indigo);
+  --color-health-goal-subtle:         rgba(99, 102, 241, 0.12);
+  --color-health-goal-border:         rgba(99, 102, 241, 0.30);
+  --color-health-goal-tint:           rgba(99, 102, 241, 0.06);
+  --color-health-threshold:           var(--primitive-scope-tactical);
+  --color-health-threshold-border:    rgba(245, 158, 11, 0.30);
+  --color-health-threshold-tint:      rgba(245, 158, 11, 0.06);
+
+  /* ── Status indicator labels ──────────────────────────── */
+  --color-status-good:                #16A34A;
+  --color-status-warning:             #D97706;
+  --color-status-critical:            #DC2626;
+
+  /* ── Alert tints (light — adjusted for warm bg) ─────────── */
+  --color-success-tint-bg:            rgba(22, 163, 74, 0.10);
+  --color-success-tint-border:        rgba(22, 163, 74, 0.35);
+  --color-success-tint-text:          #14532d;
+  --color-error-tint-bg:              rgba(220, 38, 38, 0.08);
+  --color-error-tint-border:          rgba(220, 38, 38, 0.35);
+  --color-error-tint-text:            #7f1d1d;
+  --color-info-tint-bg:               rgba(37, 99, 235, 0.08);
+  --color-info-tint-border:           rgba(37, 99, 235, 0.30);
+  --color-info-tint-text:             #1e3a8a;
+  --color-warning-tint-bg:            rgba(217, 119, 6, 0.08);
+  --color-warning-tint-border:        rgba(217, 119, 6, 0.30);
+  --color-warning-tint-text:          #78350f;
+
+  /* ── Surface interaction ─────────────────────────────── */
+  --bg-hover:                         rgba(28, 20, 16, 0.04);
+  --border-subtle:    rgba(28, 20, 16, 0.06);
+  --border-default:   rgba(28, 20, 16, 0.12);
+  --border-strong:    rgba(28, 20, 16, 0.24);
+  --border-accent:    rgba(193, 124, 94, 0.40);
+  --border-focus:     rgba(193, 124, 94, 0.70);
+
+  --shadow-xs:        0 1px 2px rgba(28, 20, 16, 0.08);
+  --shadow-sm:        0 2px 4px rgba(139, 68, 48, 0.10), 0 1px 2px rgba(28, 20, 16, 0.06);
+  --shadow-md:        0 4px 16px rgba(139, 68, 48, 0.12), 0 2px 4px rgba(28, 20, 16, 0.08);
+  --shadow-lg:        0 8px 32px rgba(139, 68, 48, 0.14), 0 4px 8px rgba(28, 20, 16, 0.10);
+  --shadow-glow:      0 0 24px rgba(193, 124, 94, 0.25);
+  --shadow-accent:    0 8px 16px rgba(193, 124, 94, 0.18), 0 2px 4px rgba(139, 68, 48, 0.12);
+
+  --gradient-accent:  linear-gradient(135deg, #8B4430 0%, #D4956F 50%, #C17C5E 100%);
+  --gradient-accent-h: linear-gradient(90deg, #8B4430 0%, #D4956F 60%, #C6886E 100%);
+  --gradient-surface: linear-gradient(135deg, rgba(253,249,247,0.98) 0%, rgba(240,235,230,0.95) 100%);
+  --gradient-overlay: linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%);
+}
+
+
+/* ── THEME: Electric Blue · Mode: Dark ──────────────────────────
+   Deep blue-navy backgrounds, electric blue accents.
+   ─────────────────────────────────────────────────────────────── */
+[data-theme="blue"][data-mode="dark"] {
+
+  --bg-primary:       var(--primitive-blue-950);
+  --bg-secondary:     var(--primitive-blue-900);
+  --bg-tertiary:      #162040;
+  --bg-overlay:       rgba(6, 11, 24, 0.88);
+  --bg-elevated:      #111D3A;
+  --bg-card:          #0E1834;
+  --bg-panel:         #0B1530;
+  --bg-track:         rgba(191, 219, 254, 0.10);  /* Sub-card track — readable against blue dark cards */
+
+  --fg-primary:       #E8F0FF;
+  --fg-secondary:     var(--primitive-cool-500);
+  --fg-muted:         var(--primitive-cool-700);
+  --fg-muted-ui:      var(--primitive-cool-500);
+  --fg-stroke:        #94A3B8;
+  --fg-inverse:       var(--primitive-blue-950);
+  --fg-on-accent:     #FFFFFF;
+
+  --color-accent:     var(--primitive-blue-600);
+  --color-accent-dim: var(--primitive-blue-800);
+  --color-accent-hi:  var(--primitive-blue-400);
+  --color-accent-subtle: rgba(26, 95, 255, 0.12);
+
+  --color-brand:      var(--primitive-blue-600);
+  --color-brand-dim:  var(--primitive-blue-800);
+  --color-brand-hi:   var(--primitive-blue-400);
+
+  --color-success:    var(--primitive-success);
+  --color-success-em: var(--primitive-success-em);
+  --color-success-ui: var(--primitive-success-ui);
+  --color-warning:    var(--primitive-warning);
+  --color-warning-ui: var(--primitive-warning-ui);
+  --color-error:      var(--primitive-error);
+  --color-error-em:   var(--primitive-error-em);
+  --color-error-ui:   var(--primitive-error-ui);
+  --color-info:       var(--primitive-blue-400);
+  --color-sky:        var(--primitive-blue-500);
+  --color-sky-hi:     var(--primitive-blue-400);
+
+  /* ── Scope (categorical) ──────────────────────────────── */
+  --color-scope-strategic:            var(--color-accent-hi);
+  --color-scope-strategic-subtle:     var(--color-accent-subtle);
+  --color-scope-tactical:             var(--primitive-scope-tactical);
+  --color-scope-tactical-subtle:      rgba(245, 158, 11, 0.12);
+  --color-scope-operational:          var(--primitive-scope-operational);
+  --color-scope-operational-subtle:   rgba(16, 185, 129, 0.12);
+
+  /* ── Health mode badges ──────────────────────────────── */
+  --color-health-goal:                var(--primitive-scope-indigo);
+  --color-health-goal-subtle:         rgba(99, 102, 241, 0.12);
+  --color-health-goal-border:         rgba(99, 102, 241, 0.30);
+  --color-health-goal-tint:           rgba(99, 102, 241, 0.06);
+  --color-health-threshold:           var(--primitive-scope-tactical);
+  --color-health-threshold-border:    rgba(245, 158, 11, 0.30);
+  --color-health-threshold-tint:      rgba(245, 158, 11, 0.06);
+
+  /* ── Status indicator labels ──────────────────────────── */
+  --color-status-good:                var(--primitive-success-ui);
+  --color-status-warning:             var(--primitive-warning-ui);
+  --color-status-critical:            var(--primitive-error-ui);
+
+  /* ── Alert tints (dark blue) ─────────────────────────── */
+  --color-success-tint-bg:            rgba(34, 197, 94, 0.10);
+  --color-success-tint-border:        rgba(34, 197, 94, 0.40);
+  --color-success-tint-text:          #bbf7d0;
+  --color-error-tint-bg:              rgba(239, 68, 68, 0.10);
+  --color-error-tint-border:          rgba(239, 68, 68, 0.45);
+  --color-error-tint-text:            #fecaca;
+  --color-info-tint-bg:               rgba(59, 130, 246, 0.10);
+  --color-info-tint-border:           rgba(59, 130, 246, 0.40);
+  --color-info-tint-text:             #bfdbfe;
+  --color-warning-tint-bg:            rgba(234, 179, 8, 0.10);
+  --color-warning-tint-border:        rgba(234, 179, 8, 0.40);
+  --color-warning-tint-text:          #fef3c7;
+
+  /* ── Surface interaction ─────────────────────────────── */
+  --bg-hover:                         rgba(232, 240, 255, 0.04);
+  --border-subtle:    rgba(232, 240, 255, 0.06);
+  --border-default:   rgba(232, 240, 255, 0.12);
+  --border-strong:    rgba(232, 240, 255, 0.24);
+  --border-accent:    rgba(26, 95, 255, 0.45);
+  --border-focus:     rgba(26, 95, 255, 0.70);
+
+  --shadow-xs:        0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-sm:        0 2px 4px rgba(26, 95, 255, 0.12), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md:        0 4px 16px rgba(26, 95, 255, 0.15), 0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-lg:        0 8px 32px rgba(26, 95, 255, 0.20), 0 4px 8px rgba(0, 0, 0, 0.40);
+  --shadow-glow:      0 0 28px rgba(26, 95, 255, 0.45);
+  --shadow-accent:    0 8px 16px rgba(26, 95, 255, 0.25), 0 2px 4px rgba(15, 32, 96, 0.35);
+
+  --gradient-accent:  linear-gradient(135deg, #0F2060 0%, #1A5FFF 50%, #3D7EFF 100%);
+  --gradient-accent-h: linear-gradient(90deg, #0F2060 0%, #1A5FFF 55%, #3D7EFF 100%);
+  --gradient-surface: linear-gradient(135deg, rgba(11,21,48,0.97) 0%, rgba(6,11,24,0.99) 100%);
+  --gradient-overlay: linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%);
+}
+
+
+/* ── THEME: Electric Blue · Mode: Light ─────────────────────────
+   Cool white backgrounds, electric blue accents, cool neutral text.
+   ─────────────────────────────────────────────────────────────── */
+[data-theme="blue"][data-mode="light"] {
+
+  --bg-primary:       var(--primitive-cool-100);
+  --bg-secondary:     var(--primitive-cool-200);
+  --bg-tertiary:      var(--primitive-cool-300);
+  --bg-overlay:       rgba(248, 250, 252, 0.90);
+  --bg-elevated:      var(--primitive-cool-50);
+  --bg-card:          var(--primitive-cool-50);
+  --bg-panel:         var(--primitive-cool-200);
+  --bg-track:         rgba(15, 23, 42, 0.10);  /* Sub-card track — readable against light cards */
+
+  --fg-primary:       var(--primitive-cool-950);
+  --fg-secondary:     var(--primitive-cool-800);
+  --fg-muted:         var(--primitive-cool-600);
+  --fg-muted-ui:      var(--primitive-cool-700);
+  --fg-stroke:        var(--primitive-cool-500);
+  --fg-inverse:       var(--primitive-cool-100);
+  --fg-on-accent:     #FFFFFF;
+
+  --color-accent:     #1A5FFF;
+  --color-accent-dim: #0F2060;
+  --color-accent-hi:  #1440B0;
+  --color-accent-subtle: rgba(26, 95, 255, 0.08);
+
+  --color-brand:      #1A5FFF;
+  --color-brand-dim:  #0F2060;
+  --color-brand-hi:   #1440B0;
+
+  --color-success:    #16A34A;
+  --color-success-em: #16A34A;
+  --color-success-ui: #16A34A;
+  --color-warning:    #D97706;
+  --color-warning-ui: #D97706;
+  --color-error:      #DC2626;
+  --color-error-em:   #DC2626;
+  --color-error-ui:   #DC2626;
+  --color-info:       #1A5FFF;
+  --color-sky:        var(--primitive-blue-600);
+  --color-sky-hi:     var(--primitive-blue-500);
+
+  /* ── Scope (categorical) ──────────────────────────────── */
+  --color-scope-strategic:            var(--color-accent-hi);
+  --color-scope-strategic-subtle:     var(--color-accent-subtle);
+  --color-scope-tactical:             var(--primitive-scope-tactical);
+  --color-scope-tactical-subtle:      rgba(245, 158, 11, 0.12);
+  --color-scope-operational:          var(--primitive-scope-operational);
+  --color-scope-operational-subtle:   rgba(16, 185, 129, 0.12);
+
+  /* ── Health mode badges ──────────────────────────────── */
+  --color-health-goal:                var(--primitive-scope-indigo);
+  --color-health-goal-subtle:         rgba(99, 102, 241, 0.12);
+  --color-health-goal-border:         rgba(99, 102, 241, 0.30);
+  --color-health-goal-tint:           rgba(99, 102, 241, 0.06);
+  --color-health-threshold:           var(--primitive-scope-tactical);
+  --color-health-threshold-border:    rgba(245, 158, 11, 0.30);
+  --color-health-threshold-tint:      rgba(245, 158, 11, 0.06);
+
+  /* ── Status indicator labels ──────────────────────────── */
+  --color-status-good:                #16A34A;
+  --color-status-warning:             #D97706;
+  --color-status-critical:            #DC2626;
+
+  /* ── Alert tints (light blue) ─────────────────────────── */
+  --color-success-tint-bg:            rgba(22, 163, 74, 0.10);
+  --color-success-tint-border:        rgba(22, 163, 74, 0.35);
+  --color-success-tint-text:          #14532d;
+  --color-error-tint-bg:              rgba(220, 38, 38, 0.08);
+  --color-error-tint-border:          rgba(220, 38, 38, 0.35);
+  --color-error-tint-text:            #7f1d1d;
+  --color-info-tint-bg:               rgba(26, 95, 255, 0.08);
+  --color-info-tint-border:           rgba(26, 95, 255, 0.30);
+  --color-info-tint-text:             #1e3a8a;
+  --color-warning-tint-bg:            rgba(217, 119, 6, 0.08);
+  --color-warning-tint-border:        rgba(217, 119, 6, 0.30);
+  --color-warning-tint-text:          #78350f;
+
+  /* ── Surface interaction ─────────────────────────────── */
+  --bg-hover:                         rgba(15, 23, 42, 0.04);
+  --border-subtle:    rgba(15, 23, 42, 0.06);
+  --border-default:   rgba(15, 23, 42, 0.12);
+  --border-strong:    rgba(15, 23, 42, 0.24);
+  --border-accent:    rgba(26, 95, 255, 0.35);
+  --border-focus:     rgba(26, 95, 255, 0.65);
+
+  --shadow-xs:        0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow-sm:        0 2px 4px rgba(26, 95, 255, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md:        0 4px 16px rgba(26, 95, 255, 0.10), 0 2px 4px rgba(15, 23, 42, 0.08);
+  --shadow-lg:        0 8px 32px rgba(26, 95, 255, 0.12), 0 4px 8px rgba(15, 23, 42, 0.10);
+  --shadow-glow:      0 0 24px rgba(26, 95, 255, 0.20);
+  --shadow-accent:    0 8px 16px rgba(26, 95, 255, 0.15), 0 2px 4px rgba(15, 32, 96, 0.10);
+
+  --gradient-accent:  linear-gradient(135deg, #0F2060 0%, #1A5FFF 50%, #3D7EFF 100%);
+  --gradient-accent-h: linear-gradient(90deg, #0F2060 0%, #1A5FFF 55%, #3D7EFF 100%);
+  --gradient-surface: linear-gradient(135deg, rgba(241,245,249,0.98) 0%, rgba(248,250,252,0.95) 100%);
+  --gradient-overlay: linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 3 — BASE ELEMENT STYLES
+   Reference only semantic tokens. Never primitives.
+   ═══════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color:       var(--bg-primary);
+  color:                  var(--fg-primary);
+  font-family:            var(--font-body);
+  font-size:              var(--text-base);
+  line-height:            var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  transition:             background-color var(--transition-slow),
+                          color var(--transition-slow);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family:   var(--font-display);
+  color:         var(--fg-primary);
+  line-height:   var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 { font-size: var(--text-5xl); font-weight: 400; }
+h2 { font-size: var(--text-4xl); font-weight: 400; }
+h3 { font-size: var(--text-3xl); font-weight: 500; }
+h4 { font-size: var(--text-2xl); font-weight: 500; }
+h5 { font-size: var(--text-xl);  font-weight: 600; }
+h6 { font-size: var(--text-lg);  font-weight: 600; }
+
+p {
+  font-size:   var(--text-base);
+  line-height: var(--leading-relaxed);
+  color:       var(--fg-primary);
+}
+
+.tagline {
+  font-family:    var(--font-tagline);
+  font-size:      var(--text-lg);
+  font-weight:    300;
+  letter-spacing: var(--tracking-wide);
+  color:          var(--fg-secondary);
+}
+
+.label {
+  font-family:    var(--font-body);
+  font-size:      var(--text-sm);
+  font-weight:    600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color:          var(--fg-muted);
+}
+
+code, pre {
+  font-family:   var(--font-mono);
+  font-size:     var(--text-sm);
+  background:    var(--bg-secondary);
+  color:         var(--color-accent-hi);
+  border-radius: var(--radius-sm);
+}
+
+a {
+  color:       var(--color-accent-hi);
+  text-decoration: none;
+  transition:  color var(--transition-fast);
+}
+a:hover { color: var(--color-accent); }
+
+
+/* ── Utility classes ─────────────────────────────────────────── */
+
+.surface {
+  background:    var(--bg-secondary);
+  border:        1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+.surface-lg {
+  background:    var(--bg-secondary);
+  border:        1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+.surface-elevated {
+  background:    var(--bg-elevated);
+  border:        1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow:    var(--shadow-md);
+}
+
+/* Accent text gradient */
+.accent-text {
+  background:              var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+.accent-border { border-color: var(--border-accent) !important; }
+.glow          { box-shadow: var(--shadow-glow); }
+
+
+/* ── Legacy aliases (keep for backward compat with existing previews) ── */
+.copper-text   { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.copper-border { border-color: var(--border-accent) !important; }
