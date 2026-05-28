@@ -1270,6 +1270,59 @@ section.s-tight { padding: 96px 0; }
 
 .contact-form .btn { align-self: center; margin-top: 8px; }
 
+/* Contact form: error + success states */
+.contact-error {
+  display: none;
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  background: var(--color-error-tint-bg);
+  border: 1px solid var(--color-error-tint-border);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin: 8px 0 0;
+  text-align: center;
+  line-height: var(--leading-snug);
+}
+.contact-error.show { display: block; }
+
+.contact-success {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  animation: contactFadeIn .5s ease;
+}
+.contact-success.show { display: block; }
+.contact-success-icon {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--color-accent-hi);
+  margin-bottom: 20px;
+}
+.contact-success-icon svg { width: 28px; height: 28px; }
+.contact-success h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--fg-primary);
+  margin-bottom: 10px;
+}
+.contact-success p {
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+@keyframes contactFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ════════════════════════════════════════════════════════════════
    FOOTER
    ════════════════════════════════════════════════════════════════ */
