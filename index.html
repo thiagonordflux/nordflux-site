@@ -1185,8 +1185,9 @@
           <p class="contact-intro">É hora de simplificar para acelerar. Vamos construir sua arquitetura de escolhas juntos?</p>
         </div>
 
-        <form class="contact-form reveal" name="contato" method="POST" data-netlify="true">
+        <form id="contactForm" class="contact-form reveal" name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contato">
+          <p style="display:none;"><label>Não preencher: <input name="bot-field"></label></p>
           <div class="form-row">
             <div class="field">
               <label for="nome">Nome</label>
@@ -1217,11 +1218,17 @@
             <label for="mensagem">Mensagem</label>
             <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre seu desafio..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">
-            Enviar mensagem
+          <button type="submit" class="btn btn-primary" id="contactSubmit">
+            <span class="btn-label">Enviar mensagem</span>
             <i data-lucide="send"></i>
           </button>
+          <p class="contact-error" id="contactError">Algo deu errado. Tente novamente em instantes ou nos chame por e-mail.</p>
         </form>
+        <div class="contact-success" id="contactSuccess">
+          <div class="contact-success-icon"><i data-lucide="check"></i></div>
+          <h3>Mensagem enviada!</h3>
+          <p>Obrigado<span id="contactSuccessName"></span>. Entraremos em contato em breve pelo e-mail informado.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1270,6 +1277,47 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Contact form: AJAX submit (avoid Netlify 404 redirect to /thank-you)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn       = document.getElementById('contactSubmit');
+        const errorEl   = document.getElementById('contactError');
+        const successEl = document.getElementById('contactSuccess');
+        const nameOut   = document.getElementById('contactSuccessName');
+        const btnLabel  = btn.querySelector('.btn-label');
+        const originalLabel = btnLabel.textContent;
+
+        errorEl.classList.remove('show');
+        btn.disabled = true;
+        btnLabel.textContent = 'Enviando…';
+
+        try {
+          const data = new FormData(contactForm);
+          const body = new URLSearchParams();
+          for (const [k, v] of data.entries()) body.append(k, v);
+          const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body.toString()
+          });
+          if (!res.ok) throw new Error('Network ' + res.status);
+
+          const firstName = (data.get('nome') || '').split(' ')[0];
+          nameOut.textContent = firstName ? ', ' + firstName : '';
+          contactForm.style.display = 'none';
+          successEl.classList.add('show');
+          if (window.lucide) window.lucide.createIcons();
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          errorEl.classList.add('show');
+          btn.disabled = false;
+          btnLabel.textContent = originalLabel;
+        }
+      });
+    }
 
     // Videos: "Ver mais" toggle
     const videosToggle = document.getElementById('videosToggle');
