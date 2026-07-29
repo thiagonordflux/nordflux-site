@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="nordflux" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico dos 4 Sinais — Empreenda X360 · NordFlux</title>
+  <meta name="description" content="Marque quantos dos 4 sinais acontecem na sua empresa e baixe o diagnóstico completo. Material complementar do Empreenda X360.">
+  <link rel="icon" type="image/png" href="assets/logo-3d-symbol.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  <style>
+    /* ── HERO ──────────────────────────────────────── */
+    .y3-hero { position: relative; padding: 136px 0 56px; overflow: hidden; text-align: center; }
+    .y3-hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 60% at 50% 12%, rgba(139,68,48,.22) 0%, transparent 70%);
+    }
+    .y3-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+    .y3-hero h1 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+      line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+      margin-bottom: 22px;
+    }
+    .y3-hero h1 em {
+      font-style: normal;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .y3-lead { color: var(--fg-secondary); font-size: var(--text-md); line-height: var(--leading-relaxed); text-wrap: pretty; }
+    .y3-hint {
+      font-family: var(--font-tagline); font-style: italic;
+      color: var(--color-accent-hi); font-size: var(--text-md-sm); margin-top: 24px;
+    }
+
+    /* ── CHECKLIST ─────────────────────────────────── */
+    .y3-check-wrap { padding-bottom: 24px; }
+    .y3-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .y3-card {
+      position: relative; text-align: left;
+      background: var(--bg-card); border: 1px solid var(--border-default);
+      border-radius: var(--radius-md); padding: 26px 26px 26px 62px;
+      cursor: pointer; font-family: var(--font-body);
+      transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+    }
+    .y3-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .y3-card[aria-pressed="true"] { border-color: var(--color-accent); background: var(--color-accent-subtle); }
+    .y3-box {
+      position: absolute; left: 24px; top: 27px;
+      width: 20px; height: 20px; border-radius: var(--radius-xs);
+      border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg-primary);
+      transition: background var(--transition-base), border-color var(--transition-base);
+    }
+    .y3-box svg { width: 13px; height: 13px; opacity: 0; transition: opacity var(--transition-fast); }
+    .y3-card[aria-pressed="true"] .y3-box { background: var(--gradient-accent); border-color: transparent; }
+    .y3-card[aria-pressed="true"] .y3-box svg { opacity: 1; }
+    .y3-card-num {
+      font-size: var(--text-2xs); font-weight: 600;
+      letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--color-accent); display: block; margin-bottom: 10px;
+    }
+    .y3-card-title {
+      display: block;
+      font-family: var(--font-display); font-size: var(--text-md-sm);
+      font-weight: 600; color: var(--fg-primary);
+      line-height: var(--leading-snug); margin-bottom: 10px;
+    }
+    .y3-card-desc { display: block; color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); margin: 0; text-wrap: pretty; }
+
+    /* ── VERDICT ───────────────────────────────────── */
+    .y3-verdict {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 28px; align-items: center;
+      background: var(--bg-secondary); border: 1px solid var(--border-default);
+      border-radius: var(--radius-md); padding: 24px 28px; margin-top: 20px;
+      transition: border-color var(--transition-base);
+    }
+    .y3-verdict.armed { border-color: var(--border-accent); }
+    .y3-count {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: var(--text-2xl); line-height: 1;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      min-width: 56px; text-align: center;
+    }
+    .y3-count-label { display: block; font-family: var(--font-body); font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--fg-muted); -webkit-text-fill-color: var(--fg-muted); margin-top: 8px; }
+    .y3-verdict-title { font-family: var(--font-display); font-size: var(--text-md-sm); font-weight: 600; margin-bottom: 6px; }
+    .y3-verdict-text { color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); margin: 0; text-wrap: pretty; }
+    .y3-verdict .btn { white-space: nowrap; }
+
+    /* ── GATE ──────────────────────────────────────── */
+    .y3-gate-section { border-top: 1px solid var(--border-subtle); }
+    .y3-gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .y3-cover {
+      border: 1px solid var(--border-default); border-radius: var(--radius-md);
+      overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .y3-cover img { display: block; width: 100%; height: auto; }
+    .y3-gate-copy h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.8vw, 2.1rem); font-weight: 500; line-height: var(--leading-tight); margin-bottom: 16px; }
+    .y3-gate-copy > p { color: var(--fg-secondary); font-size: var(--text-md-sm); line-height: var(--leading-relaxed); margin-bottom: 24px; text-wrap: pretty; }
+    .y3-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-bottom: 28px; }
+    .y3-meta-item { display: flex; align-items: center; gap: 8px; color: var(--fg-muted); font-size: var(--text-sm); }
+    .y3-meta-item svg { width: 15px; height: 15px; color: var(--color-accent); }
+    .y3-form { display: grid; gap: 16px; max-width: 460px; }
+    .y3-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .y3-form .btn { justify-self: start; margin-top: 4px; }
+    .y3-privacy { font-size: var(--text-xs); color: var(--fg-muted); line-height: var(--leading-snug); margin: 0; max-width: 420px; }
+    .y3-error {
+      display: none; font-size: var(--text-xs); color: var(--color-error);
+      background: var(--color-error-tint-bg); border: 1px solid var(--color-error-tint-border);
+      padding: 10px 14px; border-radius: var(--radius-sm); line-height: var(--leading-snug); margin: 0;
+    }
+    .y3-error.show { display: block; }
+    .y3-form-wrap.hidden { display: none; }
+    .y3-done { display: none; }
+    .y3-done.show { display: block; }
+    .y3-done-icon {
+      width: 60px; height: 60px; border-radius: var(--radius-full);
+      background: var(--color-accent-subtle); color: var(--color-accent-hi);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    .y3-done-icon svg { width: 26px; height: 26px; }
+    .y3-done h3 { font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; margin-bottom: 8px; }
+    .y3-done p { color: var(--fg-secondary); font-size: var(--text-sm-mid); line-height: var(--leading-relaxed); margin-bottom: 22px; max-width: 420px; }
+    .netlify-hidden { display: none; }
+
+    /* ── DENTRO ────────────────────────────────────── */
+    .y3-inside { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+    .y3-inside-item { border-top: 1px solid var(--border-subtle); padding-top: 20px; }
+    .y3-inside-item svg { width: 18px; height: 18px; color: var(--color-accent); margin-bottom: 12px; }
+    .y3-inside-item strong { display: block; font-family: var(--font-display); font-size: var(--text-sm-mid); font-weight: 600; margin-bottom: 8px; }
+    .y3-inside-item p { color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); margin: 0; text-wrap: pretty; }
+
+    /* ── CTA ───────────────────────────────────────── */
+    .y3-cta { text-align: center; max-width: 660px; margin: 0 auto; }
+    .y3-cta-quote { font-family: var(--font-tagline); font-style: italic; font-size: var(--text-lg); line-height: var(--leading-snug); margin-bottom: 20px; text-wrap: pretty; }
+    .y3-cta > p { color: var(--fg-secondary); font-size: var(--text-sm-mid); line-height: var(--leading-relaxed); margin-bottom: 28px; }
+    .y3-event {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 14px 24px; margin-top: 48px; padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .y3-event-tag {
+      font-size: var(--text-2xs); letter-spacing: var(--tracking-widest);
+      text-transform: uppercase; color: var(--color-accent);
+      border: 1px solid var(--border-accent); padding: 4px 10px; border-radius: var(--radius-xs);
+    }
+    .y3-event p { color: var(--fg-muted); font-size: var(--text-sm); margin: 0; }
+
+    @media (max-width: 980px) {
+      .y3-grid { grid-template-columns: 1fr; }
+      .y3-gate-grid { grid-template-columns: 1fr; gap: 40px; }
+      .y3-inside { grid-template-columns: repeat(2, 1fr); }
+      .y3-verdict { grid-template-columns: auto 1fr; }
+      .y3-verdict .btn { grid-column: 2; justify-self: start; }
+    }
+    @media (max-width: 560px) {
+      .y3-hero { padding-top: 112px; }
+      .y3-inside { grid-template-columns: 1fr; }
+      .y3-row { grid-template-columns: 1fr; }
+      .y3-verdict { grid-template-columns: 1fr; gap: 18px; }
+      .y3-count { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="atmos"></div>
+
+  <!-- Netlify form detection -->
+  <form class="netlify-hidden" name="x360-diagnostico" netlify>
+    <input type="hidden" name="form-name" value="x360-diagnostico">
+    <input type="text" name="nome">
+    <input type="text" name="empresa">
+    <input type="email" name="email">
+    <input type="hidden" name="material">
+    <input type="hidden" name="sinais">
+  </form>
+
+  <nav class="nav" id="navbar">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark">
+      <span class="brand-word">NordFlux</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <i data-lucide="arrow-left"></i>
+      Voltar ao site
+    </a>
+  </nav>
+
+  <header class="y3-hero" data-screen-label="01 Hero">
+    <div class="y3-hero-bg"></div>
+    <div class="container">
+      <div class="y3-hero-inner">
+        <p class="eyebrow centered">Diagnóstico de Gestão · Empreenda X360</p>
+        <h1>Quantos destes quatro sinais<br>acontecem na <em>sua</em> empresa?</h1>
+        <p class="y3-lead">Três ou mais e o diagnóstico é claro: o problema não está nas pessoas — está no modelo de gestão. A distinção importa porque muda o remédio.</p>
+        <p class="y3-hint">Marque os que você reconhece. A leitura do resultado aparece abaixo.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="y3-check-wrap" id="checklist" data-screen-label="02 Checklist">
+    <div class="container">
+      <div class="y3-grid">
+        <button type="button" class="y3-card" aria-pressed="false" data-sinal="1">
+          <span class="y3-box"><i data-lucide="check"></i></span>
+          <span class="y3-card-num">Sinal 1</span>
+          <span class="y3-card-title">As reuniões acontecem, mas as decisões não saem do papel</span>
+          <span class="y3-card-desc">A mesma pauta reaparece em três reuniões seguidas. A ata registra "alinhamos que…" em vez de "fulano entrega X até o dia Y".</span>
+        </button>
+
+        <button type="button" class="y3-card" aria-pressed="false" data-sinal="2">
+          <span class="y3-box"><i data-lucide="check"></i></span>
+          <span class="y3-card-num">Sinal 2</span>
+          <span class="y3-card-title">Cada um tem a sua versão das prioridades</span>
+          <span class="y3-card-desc">Três pessoas, três listas diferentes. Todo pedido interno chega com a palavra "urgente" colada nele.</span>
+        </button>
+
+        <button type="button" class="y3-card" aria-pressed="false" data-sinal="3">
+          <span class="y3-box"><i data-lucide="check"></i></span>
+          <span class="y3-card-num">Sinal 3</span>
+          <span class="y3-card-title">Os números existem, mas ninguém sabe o que fazer com eles</span>
+          <span class="y3-card-desc">O relatório é apresentado, comentado, arquivado — e nada muda por causa dele. Todo indicador é de resultado.</span>
+        </button>
+
+        <button type="button" class="y3-card" aria-pressed="false" data-sinal="4">
+          <span class="y3-box"><i data-lucide="check"></i></span>
+          <span class="y3-card-num">Sinal 4</span>
+          <span class="y3-card-title">Você ainda precisa estar presente para tudo acontecer</span>
+          <span class="y3-card-desc">Uma semana fora e as decisões ficam represadas. As pessoas trazem problemas bem descritos, mas não trazem recomendações.</span>
+        </button>
+      </div>
+
+      <div class="y3-verdict" id="verdict">
+        <div class="y3-count" id="count">0<span class="y3-count-label">de 4</span></div>
+        <div>
+          <div class="y3-verdict-title" id="verdictTitle">Nenhum sinal marcado ainda</div>
+          <p class="y3-verdict-text" id="verdictText">A contagem não é um julgamento da sua empresa — é uma indicação de onde a energia de correção rende mais nos próximos meses.</p>
+        </div>
+        <a href="#material" class="btn btn-outline">
+          Ver o material
+          <i data-lucide="arrow-down"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="s y3-gate-section" id="material" data-screen-label="03 Formulário">
+    <div class="container">
+      <div class="y3-gate-grid">
+        <div class="y3-cover">
+          <img src="assets/x360-cover.png" alt="Thiago Pandolfo — painelista confirmado no Empreenda X360">
+        </div>
+
+        <div class="y3-gate-copy">
+          <div class="y3-form-wrap" id="formWrap">
+            <p class="eyebrow">Material complementar</p>
+            <h2>Diagnóstico dos 4 Sinais —<br>versão estendida.</h2>
+            <p>Um capítulo por sinal: como ele aparece, por que acontece, o teste de 5 minutos e a primeira correção aplicável na próxima semana. Mais o painel dos 3 indicadores, o ritual de 30 minutos e um plano de 30 dias.</p>
+
+            <div class="y3-meta">
+              <span class="y3-meta-item"><i data-lucide="file-text"></i>13 páginas · PDF</span>
+              <span class="y3-meta-item"><i data-lucide="clock"></i>15 min de leitura</span>
+              <span class="y3-meta-item"><i data-lucide="gift"></i>Gratuito</span>
+            </div>
+
+            <form class="y3-form" id="y3Form" name="x360-diagnostico" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="x360-diagnostico">
+              <input type="hidden" name="material" value="Diagnóstico dos 4 Sinais — Empreenda X360">
+              <input type="hidden" name="sinais" id="sinaisField" value="0">
+              <div class="y3-row">
+                <div class="field">
+                  <label for="nome">Nome</label>
+                  <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="empresa">Empresa</label>
+                  <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" autocomplete="organization" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+              </div>
+              <p class="y3-error" id="y3Error">Preencha os três campos para continuar.</p>
+              <button type="submit" class="btn btn-primary" id="y3Submit">
+                <span class="btn-label">Liberar download</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+              <p class="y3-privacy">Sem spam. Usamos seu e-mail apenas para enviar material da NordFlux — você pode sair quando quiser.</p>
+            </form>
+          </div>
+
+          <div class="y3-done" id="y3Done">
+            <div class="y3-done-icon"><i data-lucide="check"></i></div>
+            <h3>Pronto<span id="y3Name"></span>!</h3>
+            <p>Seu material está liberado. São 13 páginas — vale abrir com calma, caneta na mão.</p>
+            <a class="btn btn-primary" href="pdfs/nordflux-diagnostico-4-sinais.pdf" download>
+              <i data-lucide="download"></i>
+              Baixar o PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="y3-inside">
+        <div class="y3-inside-item">
+          <i data-lucide="gauge"></i>
+          <strong>O painel dos 3 indicadores</strong>
+          <p>Um de resultado, um de causa, um de execução — com exemplos por tipo de negócio.</p>
+        </div>
+        <div class="y3-inside-item">
+          <i data-lucide="repeat"></i>
+          <strong>O ritual de 30 minutos</strong>
+          <p>A agenda em quatro blocos que transforma os três números em decisão, toda segunda.</p>
+        </div>
+        <div class="y3-inside-item">
+          <i data-lucide="alert-triangle"></i>
+          <strong>Os cinco erros comuns</strong>
+          <p>Armadilhas de boa intenção nas primeiras quatro semanas. Reconhecê-las economiza um mês.</p>
+        </div>
+        <div class="y3-inside-item">
+          <i data-lucide="calendar-check"></i>
+          <strong>Um plano de 30 dias</strong>
+          <p>Semana a semana, para uma empresa que continua operando enquanto muda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" data-screen-label="04 CTA">
+    <div class="container">
+      <div class="y3-cta">
+        <p class="eyebrow centered">Conversa sem compromisso</p>
+        <p class="y3-cta-quote">"Travar em algum dos três indicadores é o resultado esperado — e é uma informação útil."</p>
+        <p>Normalmente o campo que trava aponta o sinal mais forte da sua empresa. Me conte qual foi: respondo pessoalmente, sem apresentação comercial.</p>
+        <a href="index.html#contato" class="btn btn-primary">
+          Falar com a NordFlux
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <div class="y3-event">
+          <span class="y3-event-tag">Evento</span>
+          <p>Empreenda X360 · Microempa · Caxias do Sul · 1º de agosto de 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark" style="width:32px;height:32px;">
+        <div class="footer-brand-stack">
+          <div class="brand-word" style="font-size: 18px;">NordFlux</div>
+          <div class="tagline-serif">Find your North — Flow with Purpose</div>
+        </div>
+      </a>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/company/nordflux-co" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/nordflux.co/" target="_blank" rel="noopener">Instagram</a>
+        <a href="materiais.html">Materiais</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <p class="footer-copy">© 2026 NordFlux Consultoria Ltda. · CNPJ 63.130.623/0001-07</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // ── Checklist ──────────────────────────────────
+    const VERDICTS = {
+      0: ['Nenhum sinal marcado ainda', 'A contagem não é um julgamento da sua empresa — é uma indicação de onde a energia de correção rende mais nos próximos meses.'],
+      1: ['O modelo está funcionando', 'Trate o sinal isolado como ponto de atenção e acompanhe. Sinais isolados costumam ser os primeiros a aparecer quando a empresa entra num novo ciclo de crescimento.'],
+      2: ['O modelo funciona, mas no limite', 'Normalmente sustentado pelo esforço pessoal de duas ou três pessoas-chave. Funciona enquanto elas estiverem inteiras e presentes — e essa é exatamente a fragilidade.'],
+      3: ['O diagnóstico é de modelo de gestão', 'Investir em treinamento, discurso ou engajamento vai gerar melhora temporária e regressão em poucas semanas, porque a estrutura que produz o comportamento continua intacta.'],
+      4: ['O diagnóstico é de modelo de gestão', 'Investir em treinamento, discurso ou engajamento vai gerar melhora temporária e regressão em poucas semanas, porque a estrutura que produz o comportamento continua intacta.']
+    };
+
+    const cards       = Array.from(document.querySelectorAll('.y3-card'));
+    const countEl     = document.getElementById('count');
+    const verdictEl   = document.getElementById('verdict');
+    const titleEl     = document.getElementById('verdictTitle');
+    const textEl      = document.getElementById('verdictText');
+    const sinaisField = document.getElementById('sinaisField');
+
+    function refresh() {
+      const marked = cards.filter(c => c.getAttribute('aria-pressed') === 'true');
+      const n = marked.length;
+      countEl.innerHTML = n + '<span class="y3-count-label">de 4</span>';
+      titleEl.textContent = VERDICTS[n][0];
+      textEl.textContent  = VERDICTS[n][1];
+      verdictEl.classList.toggle('armed', n > 0);
+      sinaisField.value = n ? marked.map(c => c.dataset.sinal).join(', ') + ' (' + n + ' de 4)' : '0';
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.setAttribute('aria-pressed', card.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+        refresh();
+      });
+    });
+
+    // ── Form ───────────────────────────────────────
+    const form    = document.getElementById('y3Form');
+    const errorEl = document.getElementById('y3Error');
+    const submit  = document.getElementById('y3Submit');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const nome    = (data.get('nome')    || '').trim();
+      const empresa = (data.get('empresa') || '').trim();
+      const email   = (data.get('email')   || '').trim();
+
+      if (!nome || !empresa || !email) {
+        errorEl.textContent = 'Preencha os três campos para continuar.';
+        errorEl.classList.add('show');
+        return;
+      }
+      errorEl.classList.remove('show');
+
+      const label = submit.querySelector('.btn-label');
+      const original = label.textContent;
+      submit.disabled = true;
+      label.textContent = 'Enviando…';
+
+      try {
+        const body = new URLSearchParams();
+        for (const [k, v] of data.entries()) body.append(k, v);
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+      } catch (_) { /* segue para o download mesmo se a captura falhar */ }
+
+      submit.disabled = false;
+      label.textContent = original;
+
+      document.getElementById('y3Name').textContent = ', ' + nome.split(' ')[0];
+      document.getElementById('formWrap').classList.add('hidden');
+      document.getElementById('y3Done').classList.add('show');
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

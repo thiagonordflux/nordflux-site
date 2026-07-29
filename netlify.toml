@@ -33,6 +33,12 @@
   [headers.values]
     Content-Disposition = "attachment"
 
+# ─── URL amigável: nordflux.co/360 ──────────────────────
+[[redirects]]
+  from = "/360"
+  to = "/360.html"
+  status = 200
+
 # ─── SPA-style fallback para a home ─────────────────────
 [[redirects]]
   from = "/*"
