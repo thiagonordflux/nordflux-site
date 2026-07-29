@@ -33,9 +33,14 @@
   [headers.values]
     Content-Disposition = "attachment"
 
-# ─── URL amigável: nordflux.co/360 ──────────────────────
+# ─── URL amigável: nordflux.co/360 e /x360 ─────────────
 [[redirects]]
   from = "/360"
+  to = "/360.html"
+  status = 200
+
+[[redirects]]
+  from = "/x360"
   to = "/360.html"
   status = 200
 
