@@ -396,6 +396,7 @@
   --color-accent-dim: var(--primitive-copper-900);
   --color-accent-hi:  var(--primitive-copper-300);
   --color-accent-subtle: rgba(193, 124, 94, 0.12);
+  --color-copper-glow:   rgba(139, 68, 48, 0.22); /* copper-900 a 22% — glow de hero */
 
   --color-brand:      var(--primitive-copper-600);
   --color-brand-dim:  var(--primitive-copper-900);
