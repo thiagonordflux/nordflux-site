@@ -33,6 +33,12 @@
   [headers.values]
     Content-Disposition = "attachment"
 
+# ─── Kit GM servido como download ───────────────────────
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    Content-Disposition = "attachment"
+
 # ─── URL amigável: nordflux.co/360 e /x360 ─────────────
 [[redirects]]
   from = "/360"
@@ -42,6 +48,17 @@
 [[redirects]]
   from = "/x360"
   to = "/360.html"
+  status = 200
+
+# ─── URLs amigáveis: nordflux.co/gm e /gm/obrigado ─────
+[[redirects]]
+  from = "/gm"
+  to = "/gm.html"
+  status = 200
+
+[[redirects]]
+  from = "/gm/obrigado"
+  to = "/gm-obrigado.html"
   status = 200
 
 # ─── SPA-style fallback para a home ─────────────────────
