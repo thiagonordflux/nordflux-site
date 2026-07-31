@@ -178,6 +178,7 @@
     <input type="text" name="nome">
     <input type="text" name="empresa">
     <input type="email" name="email">
+    <input type="text" name="cargo">
     <input type="hidden" name="material">
     <input type="hidden" name="sinais">
   </form>
@@ -284,11 +285,28 @@
                   <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" autocomplete="organization" required>
                 </div>
               </div>
-              <div class="field">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+              <div class="y3-row">
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="cargo">Cargo</label>
+                  <select id="cargo" name="cargo" required>
+                    <option value="" disabled selected>Selecione</option>
+                    <option>CEO / Dono</option>
+                    <option>Diretor</option>
+                    <option>Gerente</option>
+                    <option>Coordenador / Líder</option>
+                    <option>Analista / Especialista</option>
+                    <option>Consultor</option>
+                    <option>Professor / Educador</option>
+                    <option>Empreendedor</option>
+                    <option>Outro</option>
+                  </select>
+                </div>
               </div>
-              <p class="y3-error" id="y3Error">Preencha os três campos para continuar.</p>
+              <p class="y3-error" id="y3Error">Preencha todos os campos para continuar.</p>
               <button type="submit" class="btn btn-primary" id="y3Submit">
                 <span class="btn-label">Liberar download</span>
                 <i data-lucide="arrow-right"></i>
@@ -425,8 +443,9 @@
       const nome    = (data.get('nome')    || '').trim();
       const empresa = (data.get('empresa') || '').trim();
       const email   = (data.get('email')   || '').trim();
+      const cargo   = (data.get('cargo')   || '').trim();
 
-      if (!nome || !empresa || !email) {
+      if (!nome || !empresa || !email || !cargo) {
         errorEl.textContent = 'Preencha os três campos para continuar.';
         errorEl.classList.add('show');
         return;
