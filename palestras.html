@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="nordflux" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palestras e Workshops — NordFlux</title>
+  <meta name="description" content="Palestras e workshops de Thiago Pandolfo sobre inovação, execução estratégica e gestão da mudança. Fichas técnicas, casos reais e contratação direta.">
+  <link rel="icon" type="image/png" href="assets/logo-3d-symbol.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  <style>
+    html, body { margin:0; padding:0; background:var(--bg-primary); overflow-x:hidden; }
+    *, *::before, *::after { box-sizing:border-box; }
+    ul, ol, li { margin:0; padding:0; list-style:none; }
+    h1, h2, h3, h4, p { margin:0; }
+    a { color:var(--color-accent-hi); text-decoration:none; }
+    a:hover { color:var(--color-accent); }
+  </style>
+</head>
+<body>
+<div style="background:var(--bg-primary); color:var(--fg-primary); font-family:var(--font-body); font-weight:300; font-size:var(--text-base); line-height:var(--leading-relaxed); min-height:100vh; position:relative;">
+
+  <div class="atmos"></div>
+
+  <nav class="nav" id="navbar">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark">
+      <span class="brand-word">NordFlux</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <i data-lucide="arrow-left"></i>
+      Voltar ao site
+    </a>
+  </nav>
+
+  <section data-screen-label="01 Hero" style="position:relative; z-index:1; padding:172px 0 88px; overflow:hidden;">
+    <div style="position:absolute; top:-10%; right:-5%; width:640px; height:640px; background:radial-gradient(circle, rgba(139,68,48,.22) 0%, transparent 70%); pointer-events:none;"></div>
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px; position:relative;">
+      <div data-r="g-hero" style="display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;">
+        <div>
+          <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:26px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Palestras &amp; Workshops</p>
+          <h1 style="font-family:var(--font-display); font-weight:500; font-size:clamp(2.4rem, 4.6vw, 3.6rem); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary);">Conhecimento que<br>vira <em style="font-style:normal; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">ação</em>.</h1>
+          <p style="font-family:var(--font-tagline); font-weight:400; font-style:italic; font-size:var(--text-xl); color:var(--fg-secondary); letter-spacing:var(--tracking-wide); margin:22px 0 20px;">Do insight à transformação — em uma tarde ou em um dia.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md); line-height:var(--leading-relaxed); max-width:520px;">Quatro palestras de palco e workshops de imersão para congressos, convenções e encontros de liderança. Cada uma com ficha técnica completa, casos reais e algo concreto que a plateia leva embora.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:36px;">
+            <a href="#contato" style="display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); border:1px solid transparent; background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Falar sobre um evento <i data-lucide="arrow-right"></i></a>
+            <a href="#repertorio" style="display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); border:1px solid var(--border-accent); color:var(--color-accent-hi); background:transparent;" data-hover="background:var(--color-accent-subtle); color:var(--fg-primary)"><i data-lucide="list"></i> Ver o repertório</a>
+          </div>
+        </div>
+        <div style="position:relative; border-radius:var(--radius-xl); overflow:hidden; border:1px solid var(--border-default); box-shadow:var(--shadow-lg); aspect-ratio:4/5;">
+          <img src="assets/palco-hero.jpg" alt="Thiago Pandolfo em palco no Sicredi Summit" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="repertorio" data-screen-label="02 Repertório" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <header style="max-width:780px; margin-bottom:36px;">
+        <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:16px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Repertório</p>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(1.9rem, 3.8vw, 2.9rem); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary); margin-bottom:14px;">Quatro palestras prontas<br>para o seu <em style="font-style:normal; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">palco</em>.</h2>
+        <p style="color:var(--fg-secondary); font-size:var(--text-md); line-height:var(--leading-relaxed);">Todas são keynotes de palco, sem conteúdo comercial, com formatos de 30 a 60 minutos e cases reais — incluindo os que deram errado.</p>
+      </header>
+
+      <nav style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:44px;">
+        <a href="#tempo" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm); padding:10px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);" data-hover="border-color:var(--border-accent); color:var(--fg-primary)"><span style="font-family:var(--font-tagline); font-style:italic; color:var(--color-accent);">01</span> Hackeando o Tempo Organizacional</a>
+        <a href="#anatomia" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm); padding:10px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);" data-hover="border-color:var(--border-accent); color:var(--fg-primary)"><span style="font-family:var(--font-tagline); font-style:italic; color:var(--color-accent);">02</span> Anatomia de uma Boa Ideia</a>
+        <a href="#proposito" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm); padding:10px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);" data-hover="border-color:var(--border-accent); color:var(--fg-primary)"><span style="font-family:var(--font-tagline); font-style:italic; color:var(--color-accent);">03</span> Inovação com Propósito</a>
+        <a href="#travessia" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm); padding:10px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);" data-hover="border-color:var(--border-accent); color:var(--fg-primary)"><span style="font-family:var(--font-tagline); font-style:italic; color:var(--color-accent);">04</span> Gestão da Mudança: A Travessia</a>
+      </nav>
+
+      <article id="tempo" data-r="g-panel" style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; margin-bottom:24px; display:grid; grid-template-columns:1.35fr .8fr; gap:48px; scroll-margin-top:110px;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--color-success-tint-border); color:var(--color-success); background:var(--color-success-tint-bg);">Pronta para contratar</span>
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-default); color:var(--fg-muted);">Keynote</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:clamp(1.5rem, 2.4vw, 2rem); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); letter-spacing:var(--tracking-tight); margin-bottom:8px;">Hackeando o Tempo Organizacional</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-lg); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:20px;">Por que as empresas que colaboram chegam antes</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:28px; max-width:600px;">Nenhuma organização é rápida o suficiente sozinha. A palestra mostra por que <strong style="color:var(--fg-primary); font-weight:600;">o tempo que falta para inovar não está dentro da empresa</strong> — e como as que abrem as portas chegam antes, gastando menos.</p>
+          <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">O que a plateia leva</span>
+          <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Por que a organização parece parada mesmo trabalhando muito — e por que acelerar por dentro não resolve.</span></li>
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>O argumento que desmonta a inovação em silo: você limita o problema às ideias de quem já está na folha de pagamento.</span></li>
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Casos globais e locais de quem comprou anos em vez de construí-los — incluindo um conduzido pelo próprio palestrante.</span></li>
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Uma pergunta para levar à reunião de segunda: <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">o que da nossa lista de projetos alguém lá fora já resolveu?</em></span></li>
+          </ul>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; align-self:start; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:22px;">Ficha técnica</p>
+          <dl style="display:flex; flex-direction:column; gap:18px;">
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Formatos</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-primary); line-height:var(--leading-snug);"><b style="font-weight:600;">45 min</b> — padrão de congresso<br><b style="font-weight:600;">60 min</b> — integral ou 48 min + Q&amp;A</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Público</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Plateia mista de congressos, convenções e encontros de liderança. Traduz para qualquer setor.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Formato</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Keynote de palco. Sem conteúdo comercial.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Idioma</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Português · Inglês sob consulta</dd></div>
+          </dl>
+          <a href="#contato" style="display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); margin-top:28px; font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Contratar <i data-lucide="arrow-right"></i></a>
+        </aside>
+      </article>
+
+      <article id="anatomia" data-r="g-panel" style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; margin-bottom:24px; display:grid; grid-template-columns:1.35fr .8fr; gap:48px; scroll-margin-top:110px;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--color-success-tint-border); color:var(--color-success); background:var(--color-success-tint-bg);">Pronta para contratar</span>
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-default); color:var(--fg-muted);">Com dinâmicas de plateia</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:clamp(1.5rem, 2.4vw, 2rem); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); letter-spacing:var(--tracking-tight); margin-bottom:8px;">Anatomia de uma Boa Ideia</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-lg); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:20px;">Como transformar problemas do dia a dia em soluções de impacto</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">Ideia boa não vem de genialidade — vem de clareza sobre o problema. A palestra dá o caminho das pedras para que <strong style="color:var(--fg-primary); font-weight:600;">as ideias da sua equipe saiam da gaveta e cheguem à execução</strong>.</p>
+
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">Começa desmontando o mito: criatividade não é dom — é conexão entre coisas que já existem. Por isso as boas ideias aparecem nos momentos mais inusitados, quando o cérebro está relaxado. A palestra mostra <strong style="color:var(--fg-primary); font-weight:600;">como criar essas condições</strong> em vez de esperar pela sorte.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">Depois vem a parte incômoda: não se apaixone pela ideia, apaixone-se pelo problema. Uma técnica simples de investigação leva um caso real até a causa que ninguém tinha visto — e a solução muda de endereço. O público sai com <strong style="color:var(--fg-primary); font-weight:600;">uma ferramenta aplicável no dia a dia</strong>.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:28px; max-width:600px;">Fecha com o filtro que separa ideia boa de uma invenção — ideia genial <strong style="color:var(--fg-primary); font-weight:600;">remove complexidade, não adiciona</strong> — e com o que ninguém gosta de ouvir: <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">o mundo não muda por causa de ideias, muda por causa de ideias executadas</em>.</p>
+
+          <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">E ainda, de bônus</span>
+          <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Três prompts de IA para brainstorming, incluindo o <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">advogado do diabo</em> que ataca a sua própria ideia.</span></li>
+          </ul>
+
+          <div style="border-left:2px solid var(--color-accent); padding:2px 0 2px 20px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:8px;">Os casos</span>
+            <p style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Casos globais e locais mostram como outras empresas já atravessaram exatamente esse problema — <strong style="color:var(--fg-primary); font-weight:600;">o que funcionou, o que custou caro e o que dá para repetir amanhã</strong>. A seleção é ajustada ao setor e ao perfil da plateia.</p>
+          </div>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; align-self:start; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:22px;">Ficha técnica</p>
+          <dl style="display:flex; flex-direction:column; gap:18px;">
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Duração</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-primary); line-height:var(--leading-snug);"><b style="font-weight:600;">40 a 60 min</b>, conforme o palco</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Público</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Equipes, programas internos de ideias, eventos de inovação e convenções. Funciona em qualquer setor.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Formato</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Palestra com dinâmicas de plateia — o público participa em dois momentos.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Idioma</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Português · Inglês sob consulta</dd></div>
+          </dl>
+          <a href="#contato" style="display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); margin-top:28px; font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Contratar <i data-lucide="arrow-right"></i></a>
+        </aside>
+      </article>
+
+      <article id="proposito" data-r="g-panel" style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; margin-bottom:24px; display:grid; grid-template-columns:1.35fr .8fr; gap:48px; scroll-margin-top:110px;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--color-success-tint-border); color:var(--color-success); background:var(--color-success-tint-bg);">Pronta para contratar</span>
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-default); color:var(--fg-muted);">Duas versões</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:clamp(1.5rem, 2.4vw, 2rem); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); letter-spacing:var(--tracking-tight); margin-bottom:14px;">Inovação com Propósito</h3>
+
+          <div style="display:inline-flex; gap:6px; padding:5px; border:1px solid var(--border-default); border-radius:var(--radius-md); background:var(--bg-elevated); margin-bottom:24px;">
+            <button type="button" data-variant="coop" onclick="setVariant('coop')" style="font-family:var(--font-body); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-wide); padding:10px 20px; border-radius:var(--radius-xs); border:0; cursor:pointer; background:var(--gradient-accent); color:var(--bg-primary);">Para cooperativas</button>
+            <button type="button" data-variant="found" onclick="setVariant('found')" style="font-family:var(--font-body); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-wide); padding:10px 20px; border-radius:var(--radius-xs); border:0; cursor:pointer; background:transparent; color:var(--fg-secondary);">Para founders</button>
+          </div>
+
+          <div data-pane="coop">
+            <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-lg); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:20px;">Da estratégia ao impacto real</p>
+            <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">O cooperativismo já inova há mais de 150 anos — só não chamava assim. A palestra mostra <strong style="color:var(--fg-primary); font-weight:600;">como transformar propósito em inovação que a comunidade sente</strong>, com uma régua clara: sem métrica, vira marketing.</p>
+            <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">Rochdale, 1844: vinte e oito tecelões cansados de comprar farinha misturada com gesso resolveram o problema montando a própria loja. Nova Petrópolis, 1902: um padre não importou a solução pronta da Europa — adaptou ao contexto, e dali saíram 37 cooperativas. <strong style="color:var(--fg-primary); font-weight:600;">Inovar sempre foi o método do cooperativismo</strong>; o que mudou foi o mundo em volta.</p>
+            <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:28px; max-width:600px;">O jovem talento, o produtor rural e o empreendedor local jogam outro jogo hoje. A palestra fecha com a virada de pergunta que separa projeto de gaveta de resultado medido: em vez de <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">“como podemos inovar?”</em>, <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">“como a inovação acelera o que já queremos ser?”</em></p>
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">O que a plateia leva</span>
+            <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
+              <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>A régua de propósito: <strong style="color:var(--fg-primary); font-weight:600;">se enriquece a cooperativa mas não desenvolve a comunidade, falhou</strong>.</span></li>
+              <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>A prova de que uma iniciativa sem uma linha de tecnologia pode transformar mais vidas que um aplicativo.</span></li>
+            </ul>
+            <div style="border-left:2px solid var(--color-accent); padding:2px 0 2px 20px;">
+              <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:8px;">Os casos</span>
+              <p style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Casos internacionais e brasileiros mostram cooperativas que já responderam a essa pergunta — <strong style="color:var(--fg-primary); font-weight:600;">com os números abertos e os erros incluídos</strong>, não só a vitrine. A seleção é ajustada ao ramo e ao porte do sistema.</p>
+            </div>
+          </div>
+
+          <div data-pane="found" style="display:none;">
+            <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-lg); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:20px;">Por que propósito virou vantagem competitiva</p>
+            <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">Propósito não é adjetivo bonito em apresentação institucional. A palestra mostra, com números e com os erros, <strong style="color:var(--fg-primary); font-weight:600;">por que a empresa que resolve um problema que importa cresce mais rápido</strong> que a que só vende um produto que existe.</p>
+            <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:28px; max-width:600px;">Consumidor, capital e talento mudaram de critério — propósito saiu do discurso institucional e entrou na conta. Mas só vale com os três juntos: <strong style="color:var(--fg-primary); font-weight:600;">ferramenta da estratégia, dor real e impacto mensurável</strong>. Falta um, e o resto é campanha de marketing.</p>
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">O que a plateia leva</span>
+            <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
+              <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>A resposta de uma frase para quando o investidor, o cliente ou o candidato perguntam <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">por que isso importa</em>.</span></li>
+              <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Uma iniciativa que transformou vidas sem uma única linha de tecnologia.</span></li>
+            </ul>
+            <div style="border-left:2px solid var(--color-accent); padding:2px 0 2px 20px;">
+              <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:8px;">Os casos</span>
+              <p style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Casos globais e locais mostram empresas que transformaram propósito em resultado medido — <strong style="color:var(--fg-primary); font-weight:600;">incluindo as apostas que não deram retorno e o motivo</strong>. A seleção é ajustada ao setor e ao estágio das empresas na plateia.</p>
+            </div>
+          </div>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; align-self:start; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:22px;">Ficha técnica</p>
+          <dl data-pane="coop" style="display:flex; flex-direction:column; gap:18px;">
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Duração</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-primary); line-height:var(--leading-snug);"><b style="font-weight:600;">40 min</b> — versão de palco<br>Até <b style="font-weight:600;">60 min</b> com Q&amp;A</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Público</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Cooperativas, sistemas cooperativos, summits, convenções e conselhos de administração.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Formato</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Palestra narrativa. Uma pergunta abre e fecha a sessão.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Idioma</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Português · Espanhol e inglês sob consulta</dd></div>
+          </dl>
+          <dl data-pane="found" style="display:none; flex-direction:column; gap:18px;">
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Duração</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-primary); line-height:var(--leading-snug);"><b style="font-weight:600;">30 min</b> — versão densa, sem vídeos<br><b style="font-weight:600;">45 min</b> com Q&amp;A</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Público</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Founders, empreendedores e lideranças de empresas em crescimento. Plateia com pouco tempo e muito ceticismo.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Formato</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Palestra direta e provocadora. Abre e fecha na mesma pergunta.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Idioma</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Português · Inglês sob consulta</dd></div>
+          </dl>
+          <a href="#contato" style="display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); margin-top:28px; font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Contratar <i data-lucide="arrow-right"></i></a>
+        </aside>
+      </article>
+
+      <article id="travessia" data-r="g-panel" style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:48px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; display:grid; grid-template-columns:1.35fr .8fr; gap:48px; scroll-margin-top:110px;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--color-info-tint-border); color:var(--color-info); background:var(--color-info-tint-bg);">Workshop</span>
+            <span style="display:inline-flex; align-items:center; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-default); color:var(--fg-muted);">3 horas · até 30 pessoas</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:clamp(1.5rem, 2.4vw, 2rem); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); letter-spacing:var(--tracking-tight); margin-bottom:8px;">Gestão da Mudança: A Travessia</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-lg); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:20px;">A única certeza é o movimento</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">A maioria das transformações não falha na tecnologia — falha nas pessoas. Atravessar a mudança é uma habilidade — e, como toda habilidade, <strong style="color:var(--fg-primary); font-weight:600;">ela se aprende e se pratica</strong>.</p>
+
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">A turma abre se posicionando fisicamente diante de 15 afirmações sobre mudança — um diagnóstico das crenças da sala em dez minutos, antes de qualquer slide. Dali saem as três leis do movimento: <strong style="color:var(--fg-primary); font-weight:600;">impermanência, complexificação e relevância</strong>.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:20px; max-width:600px;">O núcleo do workshop é entender por que a mudança trava. Preguiça costuma ser exaustão; resistência costuma ser falta de clareza. Com o Condutor, o Elefante e o Caminho, o grupo aprende a mexer no que dá resultado: o ambiente. <strong style="color:var(--fg-primary); font-weight:600;">O mundo vence sempre</strong> — a jogada é redesenhá-lo a favor, com loop de hábito, regra de ouro e nudge.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md-sm); line-height:var(--leading-relaxed); margin-bottom:28px; max-width:600px;">Termina em compromisso, não em aplauso: cada participante diz em voz alta, para um colega, o primeiro passo dos próximos 30 dias. <em style="font-family:var(--font-tagline); font-size:var(--text-md); color:var(--color-accent-hi);">Decisão anunciada vira compromisso.</em></p>
+
+          <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">O que a turma leva</span>
+          <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px;">
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span><strong style="color:var(--fg-primary); font-weight:600;">Um plano pessoal preenchido em tempo real</strong> — ninguém sai com anotação de aula: sai com plano, primeiro passo e nome de quem apoia.</span></li>
+            <li style="display:flex; gap:12px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);"><i data-lucide="check" style="color:var(--color-accent); width:16px; height:16px; flex-shrink:0; margin-top:5px;"></i><span>Um vocabulário comum para conversar sobre resistência sem culpar ninguém.</span></li>
+          </ul>
+
+          <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:14px;">As ferramentas que ficam com a turma</span>
+          <div data-r="casos" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:2px;">
+            <div style="border-left:2px solid var(--color-accent); padding-left:16px;"><span style="display:block; font-family:var(--font-display); font-size:var(--text-sm-mid); font-weight:600; color:var(--fg-primary); margin-bottom:5px;">Canvas da Minha Mudança</span><span style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Seis campos que organizam a travessia de quem está fazendo a mudança acontecer.</span></div>
+            <div style="border-left:2px solid var(--color-accent); padding-left:16px;"><span style="display:block; font-family:var(--font-display); font-size:var(--text-sm-mid); font-weight:600; color:var(--fg-primary); margin-bottom:5px;">Guia de Bolso</span><span style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed);">O método inteiro numa folha dobrada — as três leis, os três personagens e o loop do hábito.</span></div>
+          </div>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; align-self:start; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:22px;">Ficha técnica</p>
+          <dl style="display:flex; flex-direction:column; gap:18px;">
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Duração</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-primary); line-height:var(--leading-snug);"><b style="font-weight:600;">3 horas</b> — formato padrão, com intervalo</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Turma</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Até <b style="font-weight:600; color:var(--fg-primary);">30 participantes</b>. Não exige cargo de liderança.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Público</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Equipes em projetos complexos, lideranças e empresas em movimentos de mudança, e programas de formação de líderes.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Sala</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Mesas redondas de ~6 pessoas. Três dinâmicas em grupo.</dd></div>
+            <div><dt style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--fg-muted); margin-bottom:5px;">Base</dt><dd style="margin:0; font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-snug);">Switch · ADKAR/Prosci · O Poder do Hábito · Nudge · Mindset</dd></div>
+          </dl>
+          <a href="#contato" style="display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); margin-top:28px; font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Contratar <i data-lucide="arrow-right"></i></a>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Personalizada" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <div style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:56px; display:grid; grid-template-columns:1fr 0.85fr; gap:56px; position:relative; overflow:hidden; box-shadow:var(--shadow-md);" data-r="g-custom">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div style="padding:8px 0;">
+          <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent);"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Palestra Personalizada</p>
+          <h3 style="font-family:var(--font-display); font-size:clamp(1.6rem, 2.6vw, 2.2rem); font-weight:600; line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary); margin:14px 0 18px;">Uma palestra feita para o seu contexto.</h3>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md); line-height:var(--leading-relaxed); margin-bottom:36px;">Não encontrou exatamente o que precisa? Thiago desenha palestras sob medida para o seu evento, desafio e público — com cases do seu setor, linguagem adequada e dinâmicas adaptadas.</p>
+          <ol style="display:flex; flex-direction:column; gap:22px;">
+            <li style="display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start;">
+              <span style="font-family:var(--font-tagline); font-weight:500; font-size:var(--text-2xl); background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:.9; min-width:56px;">01</span>
+              <div><strong style="display:block; font-family:var(--font-display); font-size:var(--text-md-sm); font-weight:600; color:var(--fg-primary); margin-bottom:4px;">Briefing</strong><span style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Uma conversa de 30 min para entender o evento e o público.</span></div>
+            </li>
+            <li style="display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start;">
+              <span style="font-family:var(--font-tagline); font-weight:500; font-size:var(--text-2xl); background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:.9; min-width:56px;">02</span>
+              <div><strong style="display:block; font-family:var(--font-display); font-size:var(--text-md-sm); font-weight:600; color:var(--fg-primary); margin-bottom:4px;">Desenho</strong><span style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">Adaptamos ou criamos com cases e linguagem do seu contexto.</span></div>
+            </li>
+            <li style="display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start;">
+              <span style="font-family:var(--font-tagline); font-weight:500; font-size:var(--text-2xl); background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:.9; min-width:56px;">03</span>
+              <div><strong style="display:block; font-family:var(--font-display); font-size:var(--text-md-sm); font-weight:600; color:var(--fg-primary); margin-bottom:4px;">Entrega</strong><span style="font-size:var(--text-sm-mid); color:var(--fg-secondary); line-height:var(--leading-relaxed);">A palestra acontece com energia e interatividade.</span></div>
+            </li>
+          </ol>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; align-self:start; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:18px;">Temas disponíveis</p>
+          <ul style="display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Transformação Digital</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Execução da Estratégia &amp; OKRs</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Liderança e Gestão da Mudança</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Ecossistemas de Inovação &amp; Startups</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>IA Aplicada a Negócios</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Cooperativismo e Inovação</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Empreendedorismo e Mentalidade de Startup</li>
+            <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm-mid); color:var(--fg-secondary);"><i data-lucide="check" style="width:16px; height:16px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Gestão por Indicadores &amp; Tomada de Decisão</li>
+          </ul>
+          <a href="#contato" style="display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); margin-top:24px; font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Solicitar palestra personalizada <i data-lucide="arrow-right"></i></a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="04 Palco" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <header style="max-width:760px; margin-bottom:40px;">
+        <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:16px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>No palco</p>
+        <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(1.9rem, 3.8vw, 2.9rem); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary);">Momentos de <em style="font-style:normal; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">palco</em>.</h2>
+      </header>
+      <div data-r="g-gal" style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-2.jpg" alt="Palestra em congresso" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-8.jpg" alt="Palestra na Central Centro Norte Inovação" style="width:100%; height:100%; object-fit:cover; object-position:50% 30%; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-3.jpg" alt="Painel de debate" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-4.jpg" alt="Palestra em summit universitário" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-5.jpg" alt="Palestra em auditório" style="width:100%; height:100%; object-fit:cover; object-position:28% 26%; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-6.jpg" alt="Palestra em sala de aula" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div style="position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-default); height:340px; flex:1 1 calc(25% - 12px);"><img src="assets/palco-7.jpg" alt="Demoday de programa de aceleração" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section data-screen-label="05 Workshops" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <header style="max-width:720px; margin-bottom:32px;">
+        <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:16px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Workshops de imersão</p>
+        <h2 style="font-family:var(--font-display); font-size:clamp(1.4rem, 2.2vw, 1.8rem); font-weight:600; letter-spacing:var(--tracking-tight); color:var(--fg-primary); margin-bottom:12px; line-height:var(--leading-snug);">Imersão que gera decisão.</h2>
+        <p style="color:var(--fg-secondary); font-size:var(--text-md); line-height:var(--leading-relaxed);">Além da <a href="#travessia">Travessia</a>, três formatos de dia inteiro com a sua equipe. Cada um tem um entregável concreto.</p>
+      </header>
+      <div data-r="g-3" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;">
+        <article style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; display:flex; flex-direction:column;" data-hover="border-color:var(--border-accent)">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--gradient-accent); opacity:.6;"></div>
+          <span style="display:inline-flex; align-items:center; width:fit-content; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-accent); color:var(--color-accent-hi); background:var(--color-accent-subtle); margin-bottom:16px;">Estruturado</span>
+          <h3 style="font-family:var(--font-display); font-size:var(--text-md); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); margin-bottom:6px;">Alinhamento de Fundadores</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-sm-mid); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:24px;">Um dia para que todos cheguem a uma conclusão honesta</p>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">Para quem</span>
+            <p style="color:var(--fg-secondary); font-size:var(--text-sm-mid); line-height:var(--leading-relaxed);">Startups e empresas com 2 a 4 sócios que precisam alinhar visão, papéis e próximos passos.</p>
+          </div>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">O que sai do dia</span>
+            <ul style="display:flex; flex-direction:column; gap:10px;">
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Decisão clara sobre papéis e responsabilidades</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Visão compartilhada dos próximos 12 meses</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Objetivos priorizados com responsáveis</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Documento de saída pronto</li>
+            </ul>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px 18px; padding:14px 0; margin-bottom:16px; border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="clock" style="width:14px; height:14px; color:var(--color-accent);"></i> 6h de imersão</span>
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="users" style="width:14px; height:14px; color:var(--color-accent);"></i> 2 a 4 participantes</span>
+          </div>
+          <a href="#contato" style="margin-top:auto; display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Quero este workshop <i data-lucide="arrow-right"></i></a>
+        </article>
+
+        <article style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; display:flex; flex-direction:column;" data-hover="border-color:var(--border-accent)">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--gradient-accent); opacity:.6;"></div>
+          <span style="display:inline-flex; align-items:center; width:fit-content; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--border-accent); color:var(--color-accent-hi); background:var(--color-accent-subtle); margin-bottom:16px;">Estruturado</span>
+          <h3 style="font-family:var(--font-display); font-size:var(--text-md); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); margin-bottom:6px;">Sprint de Estratégia</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-sm-mid); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:24px;">Do caos de prioridades à clareza de execução em um dia</p>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">Para quem</span>
+            <p style="color:var(--fg-secondary); font-size:var(--text-sm-mid); line-height:var(--leading-relaxed);">Times de liderança que precisam alinhar OKRs e criar um ritmo de gestão para o próximo trimestre.</p>
+          </div>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">O que sai do dia</span>
+            <ul style="display:flex; flex-direction:column; gap:10px;">
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>OKRs do trimestre definidos e priorizados</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Indicadores estruturados por área</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Responsáveis designados por objetivo</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Ritmo de reuniões acordado</li>
+            </ul>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px 18px; padding:14px 0; margin-bottom:16px; border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="clock" style="width:14px; height:14px; color:var(--color-accent);"></i> 8h</span>
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="users" style="width:14px; height:14px; color:var(--color-accent);"></i> Time de liderança (até 12 pessoas)</span>
+          </div>
+          <a href="#contato" style="margin-top:auto; display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Quero este workshop <i data-lucide="arrow-right"></i></a>
+        </article>
+
+        <article style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; display:flex; flex-direction:column;" data-hover="border-color:var(--border-accent)">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:var(--gradient-accent); opacity:.6;"></div>
+          <span style="display:inline-flex; align-items:center; width:fit-content; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; padding:5px 12px; border-radius:var(--radius-xs); border:1px solid var(--color-info-tint-border); color:var(--color-info); background:var(--color-info-tint-bg); margin-bottom:16px;">Novo</span>
+          <h3 style="font-family:var(--font-display); font-size:var(--text-md); font-weight:600; color:var(--fg-primary); line-height:var(--leading-snug); margin-bottom:6px;">IA na Prática para PMEs</h3>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-sm-mid); color:var(--color-accent-hi); line-height:var(--leading-snug); margin-bottom:24px;">Saia com IA funcionando no seu negócio — não só na sua cabeça</p>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">Para quem</span>
+            <p style="color:var(--fg-secondary); font-size:var(--text-sm-mid); line-height:var(--leading-relaxed);">Donos e gestores de pequenas e médias empresas que querem adotar IA de forma prática, sem depender de TI.</p>
+          </div>
+          <div style="margin-bottom:18px;">
+            <span style="display:block; font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:10px;">O que sai do dia</span>
+            <ul style="display:flex; flex-direction:column; gap:10px;">
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Mapa de oportunidades de IA na sua empresa</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>3 ferramentas testadas e configuradas</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Prompts prontos para o seu contexto</li>
+              <li style="display:flex; gap:10px; align-items:flex-start; font-size:var(--text-sm); color:var(--fg-secondary);"><i data-lucide="check" style="width:15px; height:15px; color:var(--color-accent); flex-shrink:0; margin-top:4px;"></i>Plano de adoção por área</li>
+            </ul>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px 18px; padding:14px 0; margin-bottom:16px; border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="clock" style="width:14px; height:14px; color:var(--color-accent);"></i> 6h</span>
+            <span style="display:inline-flex; align-items:center; gap:8px; font-size:var(--text-xs); color:var(--fg-muted); letter-spacing:var(--tracking-wide);"><i data-lucide="users" style="width:14px; height:14px; color:var(--color-accent);"></i> Equipe de gestão (até 15 pessoas)</span>
+          </div>
+          <a href="#contato" style="margin-top:auto; display:inline-flex; width:100%; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:14px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Quero este workshop <i data-lucide="arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+
+  <section data-screen-label="06 Quem sobe ao palco" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <div style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-xl); padding:56px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; display:grid; grid-template-columns:auto 1.15fr 1fr; gap:48px; align-items:start;" data-r="g-bio">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-accent);"></div>
+        <div style="width:132px; height:132px; border-radius:var(--radius-full); overflow:hidden; border:1px solid var(--border-accent); box-shadow:var(--shadow-sm);">
+          <img src="assets/face-thiago.png" alt="Thiago Pandolfo" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div>
+          <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:12px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Quem sobe ao palco</p>
+          <h2 style="font-family:var(--font-display); font-size:clamp(1.6rem, 2.6vw, 2.1rem); font-weight:600; line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary); margin-bottom:6px;">Thiago Pandolfo</h2>
+          <p style="font-family:var(--font-tagline); font-style:italic; font-size:var(--text-md); color:var(--color-accent-hi); margin-bottom:20px;">Sócio-fundador NordFlux · Palestrante em Inovação e Execução Estratégica</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-sm-mid); line-height:var(--leading-relaxed); margin-bottom:14px;">Passou <strong style="color:var(--fg-primary); font-weight:600;">mais de vinte anos dentro de uma organização grande</strong> — liderou a gestão da mudança de uma transformação digital, dirigiu times de produto e, entre 2023 e 2025, esteve à frente do <strong style="color:var(--fg-primary); font-weight:600;">Complexo.Lab</strong>, o time de inovação da Sicredi Pioneira.</p>
+          <p style="color:var(--fg-secondary); font-size:var(--text-sm-mid); line-height:var(--leading-relaxed);">Hoje é sócio-fundador da <strong style="color:var(--fg-primary); font-weight:600;">NordFlux</strong>, consultoria de Gestão, Inovação e Tecnologia, professor em MBAs e programas de especialização, e publica semanalmente no Instagram histórias sobre inovação e negócios. Não traz teoria distante: as histórias que conta ele viveu de dentro.</p>
+        </div>
+        <aside style="background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow-sm);">
+          <p style="font-size:var(--text-2xs); font-weight:600; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:18px;">Credenciais</p>
+          <ul style="display:flex; flex-direction:column; gap:14px;">
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span>Liderou o <strong style="color:var(--fg-primary); font-weight:600;">CVC Comunitá</strong>, primeiro Corporate Venture Capital de cooperativas do Brasil, e criou o <strong style="color:var(--fg-primary); font-weight:600;">Aceleracoop</strong>, primeiro programa de aceleração de cooperativas do país</li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span>Liderou a gestão da mudança de uma transformação digital que alcançou <strong style="color:var(--fg-primary); font-weight:600;">+22 mil colaboradores em 108 organizações</strong>, com uma rede de +100 agentes da mudança</li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span>Protagonista na criação da <strong style="color:var(--fg-primary); font-weight:600;">Rede Latino-americana de Incubadoras e Aceleradoras de Cooperativas</strong></li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span><strong style="color:var(--fg-primary); font-weight:600;">Mestre</strong> em Gestão e Negócios (Unisinos + Université de Poitiers) · MBAs FGV, PUCRS e UC Irvine</li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span><strong style="color:var(--fg-primary); font-weight:600;">Prosci</strong> Certified Change Practitioner · professor de Gestão da Mudança na PUCRS</li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span>Pós-graduação em <strong style="color:var(--fg-primary); font-weight:600;">Administração e Negócios pela FGV</strong>, com extensão na <strong style="color:var(--fg-primary); font-weight:600;">UCI · Califórnia</strong></li>
+            <li style="font-size:var(--text-sm); color:var(--fg-secondary); line-height:var(--leading-relaxed); padding-left:18px; position:relative;"><span style="position:absolute; left:0; color:var(--color-accent);">—</span>Pós-graduação em <strong style="color:var(--fg-primary); font-weight:600;">Marketing, Branding e Growth pela PUCRS</strong></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="07 Palcos" data-r="sec" style="position:relative; z-index:1; padding:96px 0 0;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:24px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Palcos e salas de aula</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Gramado Summit</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">FOREMIC · Punta Cana</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">SEBRAE Hacking Cuiabá</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Cooptech Crédito</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">WCM</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Coopsparty Summit</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Legado.Coop</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Eventos corporativos</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Feevale Summit</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Empreenda X360 · Microempa</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Rede Latino-americana de Incubadoras · Montevidéu</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Unisinos</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">PUCRS</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Univates</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">Unisc</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">CESURG</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">ESCOOP</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">SESCOOP/RS</span>
+        <span style="font-size:var(--text-sm); padding:9px 18px; border:1px solid var(--border-default); border-radius:var(--radius-xs); color:var(--fg-secondary); background:var(--bg-card);">OCERGS</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" data-screen-label="08 Contato" data-r="sec" style="position:relative; z-index:1; padding:96px 0 112px;">
+    <div data-r="container" style="max-width:1180px; margin:0 auto; padding:0 48px;">
+      <div style="background:var(--gradient-surface); border:1px solid var(--border-accent); border-radius:var(--radius-xl); padding:64px 56px; box-shadow:var(--shadow-lg); display:grid; grid-template-columns:1.2fr 1fr; gap:56px; align-items:center;" data-r="g-cta">
+        <div>
+          <p style="display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); font-weight:500; letter-spacing:var(--tracking-widest); text-transform:uppercase; color:var(--color-accent); margin-bottom:16px;"><span style="width:28px; height:1px; background:var(--color-accent); display:inline-block;"></span>Contratar uma palestra</p>
+          <h2 style="font-family:var(--font-display); font-weight:500; font-size:clamp(1.8rem, 3.2vw, 2.5rem); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); color:var(--fg-primary); margin-bottom:16px;">Conte sobre o seu evento<br>— respondo em <em style="font-style:normal; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">até 24h</em>.</h2>
+          <p style="color:var(--fg-secondary); font-size:var(--text-md); line-height:var(--leading-relaxed); max-width:480px;">Data, formato, perfil da plateia e tempo de palco. Com isso já dá para dizer qual palestra encaixa melhor — e adaptar o que for preciso.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <a href="index.html#contato" style="display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:16px 28px; border-radius:var(--radius-xs); background:var(--gradient-accent); color:var(--bg-primary); box-shadow:var(--shadow-accent);" data-hover="opacity:.92; box-shadow:var(--shadow-glow)">Enviar mensagem <i data-lucide="arrow-right"></i></a>
+          <a href="https://wa.me/5551991807095" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-badge); text-transform:uppercase; padding:16px 28px; border-radius:var(--radius-xs); border:1px solid var(--border-accent); color:var(--color-accent-hi); background:transparent;" data-hover="background:var(--color-accent-subtle); color:var(--fg-primary)"><i data-lucide="message-circle"></i> WhatsApp</a>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px; padding-top:20px; border-top:1px solid var(--border-subtle);">
+            <a href="mailto:thiago@nordflux.co" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm-mid); color:var(--fg-secondary);" data-hover="color:var(--color-accent-hi)"><i data-lucide="mail" style="width:15px; height:15px; color:var(--color-accent);"></i>thiago@nordflux.co</a>
+            <a href="https://www.linkedin.com/in/thiagopandolfo/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm-mid); color:var(--fg-secondary);" data-hover="color:var(--color-accent-hi)"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--color-accent); flex-shrink:0;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>/thiagopandolfo</a>
+            <a href="https://www.instagram.com/pandolfot/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; font-size:var(--text-sm-mid); color:var(--fg-secondary);" data-hover="color:var(--color-accent-hi)"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--color-accent); flex-shrink:0;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"></path></svg>@pandolfot</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark" style="width:32px;height:32px;">
+        <div class="footer-brand-stack">
+          <div class="brand-word" style="font-size: 18px;">NordFlux</div>
+          <div class="tagline-serif">Find your North — Flow with Purpose</div>
+        </div>
+      </a>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/company/nordflux-co" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/nordflux.co/" target="_blank" rel="noopener">Instagram</a>
+        <a href="materiais.html">Materiais</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <p class="footer-copy">© 2026 NordFlux Consultoria Ltda. · CNPJ 63.130.623/0001-07</p>
+    </div>
+  </footer>
+</div>
+<script>
+
+  function layout(w) {
+    var sm = w <= 860, md = w <= 1024;
+    var each = function (sel, fn) { document.querySelectorAll('[data-r="' + sel + '"]').forEach(fn); };
+    each('container', function (el) { el.style.padding = sm ? '0 24px' : (md ? '0 32px' : '0 48px'); });
+    each('sec', function (el) { el.style.padding = sm ? '64px 0 0' : '96px 0 0'; });
+    each('g-hero', function (el) {
+      el.style.gridTemplateColumns = md ? '1fr' : '1.05fr .95fr';
+      el.style.gap = md ? '40px' : '64px';
+    });
+    each('g-panel', function (el) {
+      el.style.gridTemplateColumns = md ? '1fr' : '1.35fr .8fr';
+      el.style.gap = md ? '36px' : '48px';
+      el.style.padding = sm ? '32px' : (md ? '40px' : '48px');
+    });
+    each('casos', function (el) { el.style.gridTemplateColumns = sm ? '1fr' : '1fr 1fr'; });
+    each('g-custom', function (el) {
+      el.style.gridTemplateColumns = md ? '1fr' : '1fr 0.85fr';
+      el.style.gap = md ? '40px' : '56px';
+      el.style.padding = sm ? '32px' : (md ? '40px' : '56px');
+    });
+    each('g-gal', function (el) {
+      var basis = sm ? 'calc(50% - 8px)' : 'calc(25% - 12px)';
+      var h = sm ? '230px' : (md ? '280px' : '340px');
+      Array.prototype.forEach.call(el.children, function (c) {
+        c.style.flex = '1 1 ' + basis; c.style.height = h;
+      });
+    });
+    each('g-3', function (el) { el.style.gridTemplateColumns = sm ? '1fr' : (md ? '1fr 1fr' : 'repeat(3, 1fr)'); });
+    each('g-bio', function (el) {
+      el.style.gridTemplateColumns = md ? '1fr' : 'auto 1.15fr 1fr';
+      el.style.gap = md ? '32px' : '48px';
+      el.style.padding = sm ? '32px' : (md ? '40px' : '56px');
+    });
+    each('g-cta', function (el) {
+      el.style.gridTemplateColumns = md ? '1fr' : '1.2fr 1fr';
+      el.style.gap = md ? '36px' : '56px';
+      el.style.padding = sm ? '40px 32px' : (md ? '48px 40px' : '64px 56px');
+    });
+  }
+
+  function setVariant(v) {
+    document.querySelectorAll('[data-pane]').forEach(function (el) {
+      var on = el.getAttribute('data-pane') === v;
+      el.style.display = on ? (el.tagName === 'DL' ? 'flex' : 'block') : 'none';
+    });
+    document.querySelectorAll('[data-variant]').forEach(function (b) {
+      var on = b.getAttribute('data-variant') === v;
+      b.style.background = on ? 'var(--gradient-accent)' : 'transparent';
+      b.style.color = on ? 'var(--bg-primary)' : 'var(--fg-secondary)';
+    });
+    icons();
+  }
+
+  function icons() { if (window.lucide) window.lucide.createIcons(); }
+
+  function onScroll() {
+    var nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  }
+
+  function onResize() { layout(window.innerWidth); }
+
+  // hover states (inline-style equivalents of the design)
+  document.querySelectorAll('[data-hover]').forEach(function (el) {
+    var base = el.getAttribute('style') || '';
+    var hov = base + ';' + el.getAttribute('data-hover');
+    el.addEventListener('mouseenter', function () { el.setAttribute('style', hov); });
+    el.addEventListener('mouseleave', function () { el.setAttribute('style', base); });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
+  window.addEventListener('DOMContentLoaded', icons);
+  window.addEventListener('load', icons);
+  onResize();
+  icons();
+
+</script>
+</body>
+</html>
