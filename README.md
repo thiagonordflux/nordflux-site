@@ -37,7 +37,7 @@ O Netlify captura automaticamente as submissões dos formulários abaixo. Ver tu
 |---|---|---|
 | `contato` | `index.html` → seção Contato | nome, e-mail, empresa, assunto, mensagem |
 | `mailing-list` | `materiais.html` → modal de download | nome, e-mail, empresa, cargo, material |
-| `diagnostico-maturidade` | `diagnostico.html` → gate antes do resultado | nome, e-mail, telefone, empresa, cargo + ocultos: tipo_negocio, leitura, sinais_presentes, pontuacao_sinais, pontuacao_painel, respostas (JSON) |
+| `diagnostico-maturidade` | `diagnostico.html` → gate antes do resultado | nome, e-mail, telefone, empresa, cargo + ocultos: tipo_negocio, leitura, sinais_presentes, pontuacao_sinais, pontuacao_painel, **resumo** (texto legível: cada resposta em palavras e o que a pessoa viu na tela), **link_resultado** (URL `?r=…` que reabre o resultado exatamente como foi exibido), respostas (JSON) |
 
 **Senha de acesso aos PDFs:** `nordflux2026` (validada no JS do cliente — gate leve, não segurança real).
 

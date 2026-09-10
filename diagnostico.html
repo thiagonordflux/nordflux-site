@@ -228,6 +228,8 @@
     <input type="hidden" name="sinais_presentes">
     <input type="hidden" name="pontuacao_sinais">
     <input type="hidden" name="pontuacao_painel">
+    <input type="hidden" name="link_resultado">
+    <textarea name="resumo"></textarea>
     <input type="hidden" name="respostas">
   </form>
 
@@ -324,6 +326,8 @@
             <input type="hidden" name="sinais_presentes" id="fSinais">
             <input type="hidden" name="pontuacao_sinais" id="fPontSinais">
             <input type="hidden" name="pontuacao_painel" id="fPontPainel">
+            <input type="hidden" name="link_resultado" id="fLink">
+            <textarea name="resumo" id="fResumo" class="netlify-hidden" aria-hidden="true" tabindex="-1"></textarea>
             <input type="hidden" name="respostas" id="fRespostas">
 
             <div class="field">
@@ -381,6 +385,10 @@
         <button type="button" class="btn btn-ghost" id="btnPrint">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Salvar em PDF
+        </button>
+        <button type="button" class="btn btn-ghost" id="btnCopy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="btn-label">Copiar link do resultado</span>
         </button>
         <button type="button" class="btn btn-ghost" id="btnRestart">Refazer o diagnóstico</button>
       </div>
@@ -691,6 +699,56 @@
   const STATUS_LABEL = { presente: 'Presente', atencao: 'Ponto de atenção', ausente: 'Não se manifesta' };
 
   /* ═══════════════════════════════════════════════════════════════
+     ESTADO NA URL · RESUMO LEGÍVEL
+     O link do resultado codifica as respostas (?r=tipo.12dígitos.5dígitos)
+     e o nome/empresa (?n= e ?e=), para reabrir a página exatamente como
+     a pessoa viu. O resumo vai no e-mail da Netlify em texto corrido.
+     ═══════════════════════════════════════════════════════════════ */
+  function codificarEstado() {
+    const sin = [1, 2, 3, 4].map(n => respostas.sinais[n].join('')).join('');
+    const pai = PAINEL.map(p => respostas.painel[p.id]).join('');
+    return (respostas.tipo || 'outro') + '.' + sin + '.' + pai;
+  }
+  function decodificarEstado(str) {
+    const m = /^([a-z]+)\.([0-3]{12})\.([0-2]{5})$/.exec(str || '');
+    if (!m || !TIPOS_NEGOCIO.some(t => t.id === m[1])) return false;
+    respostas.tipo = m[1];
+    [1, 2, 3, 4].forEach((n, i) => { respostas.sinais[n] = m[2].slice(i * 3, i * 3 + 3).split('').map(Number); });
+    PAINEL.forEach((p, i) => { respostas.painel[p.id] = Number(m[3][i]); });
+    return true;
+  }
+  function linkResultado(nome, empresa) {
+    const base = location.origin + location.pathname.replace(/\.html$/, '');
+    return base + '?r=' + codificarEstado() + '&n=' + encodeURIComponent(nome) + '&e=' + encodeURIComponent(empresa);
+  }
+  function montarResumo(r, nome, empresa) {
+    const L = [];
+    L.push('DIAGNÓSTICO DE ' + empresa.toUpperCase() + ' (' + nome + ')');
+    L.push('Tipo de negócio: ' + r.tipo.t);
+    L.push('Leitura: ' + r.leitura.faixa + ' · ' + r.leitura.titulo);
+    L.push('Sinais presentes: ' + r.contagem + ' de 4' + (r.presentes.length ? ' (' + r.presentes.map(s => s.n).join(', ') + ')' : ''));
+    L.push('Sinal prioritário mostrado: Sinal ' + r.prioridade.n + ' · ' + r.prioridade.titulo);
+    L.push('');
+    r.sinais.forEach(s => {
+      L.push('SINAL ' + s.n + ' · ' + s.titulo + ' → ' + STATUS_LABEL[s.status].toUpperCase() + ' (' + s.pts + '/' + REGRAS.maxSinal + ')');
+      s.afirmacoes.forEach((a, i) => { L.push('  ' + s.n + '.' + (i + 1) + ' ' + a + ' → ' + ESCALA[respostas.sinais[s.n][i]].t); });
+    });
+    L.push('');
+    const indicadoresOk = PAINEL.slice(0, 3).filter(p => respostas.painel[p.id] === 2).length;
+    L.push('PAINEL E RITUAL → ' + r.painelPts + '/' + REGRAS.maxPainel + ' · ' + indicadoresOk + ' de 3 indicadores instalados');
+    PAINEL.forEach(p => { L.push('  ' + p.tipo + ' → ' + ESCALA_PAINEL.find(o => o.v === respostas.painel[p.id]).t); });
+    L.push('');
+    L.push('O QUE A PESSOA VIU NA TELA:');
+    L.push('  1. Leitura "' + r.leitura.titulo + '"' + (r.contagem >= 2 ? ' + alerta para não atacar os 4 sinais ao mesmo tempo' : ''));
+    L.push('  2. Sinais em ordem de intensidade: ' + r.ordenados.map(s => 'S' + s.n + ' (' + s.pts + ')').join(' > ') + '. Abertos com teste de 5 min e primeira correção: ' + r.ordenados.filter((s, i) => i === 0 || s.status === 'presente').map(s => 'S' + s.n).join(', '));
+    L.push('  3. Painel dos 3 indicadores com exemplos de "' + r.tipo.t + '"' + (r.tipo.resultado ? ' (' + r.tipo.resultado + ' / ' + r.tipo.causa + ' / ' + r.tipo.execucao + ')' : ''));
+    L.push('  4. Ritual de 30 minutos' + (respostas.painel.ritual === 2 ? ' (para conferir)' : ' (a instalar)'));
+    L.push('  5. Sinais vitais: ' + (respostas.painel.vitais < 2 ? 'mostrados' : 'não mostrados, já existem'));
+    L.push('  6. Plano de 30 dias e os cinco erros das primeiras semanas');
+    return L.join('\n');
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      GATE (captação)
      ═══════════════════════════════════════════════════════════════ */
   function prepararGate(r) {
@@ -850,18 +908,22 @@
   $('leadForm').addEventListener('submit', async e => {
     e.preventDefault();
     const form = e.target;
-    const data = new FormData(form);
-    const nome = (data.get('nome') || '').trim();
-    const email = (data.get('email') || '').trim();
-    const empresa = (data.get('empresa') || '').trim();
-    const cargo = (data.get('cargo') || '').trim();
-    const telefone = (data.get('telefone') || '').trim();
+    const nome = $('nome').value.trim();
+    const email = $('email').value.trim();
+    const empresa = $('empresa').value.trim();
+    const cargo = $('cargo').value.trim();
+    const telefone = $('telefone').value.trim();
     const err = $('leadError');
 
     if (!nome || !email || !empresa || !cargo || !telefone) { err.textContent = 'Preencha todos os campos para ver o diagnóstico.'; err.classList.add('show'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Confira o e-mail: parece incompleto.'; err.classList.add('show'); return; }
     if (telefone.replace(/\D/g, '').length < 10) { err.textContent = 'Confira o telefone: use DDD e número (10 ou 11 dígitos).'; err.classList.add('show'); return; }
     err.classList.remove('show');
+
+    const resultado = calcular();
+    $('fLink').value = linkResultado(nome, empresa);
+    $('fResumo').value = montarResumo(resultado, nome, empresa);
+    const data = new FormData(form);
 
     const btn = $('leadSubmit'); const label = btn.querySelector('.btn-label'); const original = label.textContent;
     btn.disabled = true; label.textContent = 'Enviando…';
@@ -884,6 +946,22 @@
   });
 
   $('btnPrint').addEventListener('click', () => window.print());
+  $('btnCopy').addEventListener('click', async () => {
+    const url = linkResultado(lead.nome, lead.empresa);
+    const label = $('btnCopy').querySelector('.btn-label');
+    try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+    catch (_) { window.prompt('Copie o link do resultado:', url); }
+    setTimeout(() => { label.textContent = 'Copiar link do resultado'; }, 2500);
+  });
+
+  // Abertura direta de um resultado pela URL (link enviado no e-mail do lead)
+  (function abrirPelaUrl() {
+    const q = new URLSearchParams(location.search);
+    if (!q.get('r') || !decodificarEstado(q.get('r'))) return;
+    lead = { nome: (q.get('n') || 'Visitante').trim() || 'Visitante', empresa: (q.get('e') || 'sua empresa').trim() || 'sua empresa', email: '', cargo: '', telefone: '' };
+    renderResult(calcular());
+    document.querySelectorAll('.dm-screen').forEach(s => s.classList.toggle('active', s.id === 'screen-result'));
+  })();
   $('btnRestart').addEventListener('click', () => {
     respostas.tipo = null; [1, 2, 3, 4].forEach(n => respostas.sinais[n] = [null, null, null]); respostas.painel = {};
     stepIdx = 0; renderStep(); showScreen('screen-quiz');
