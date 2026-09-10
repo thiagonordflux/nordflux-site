@@ -18,6 +18,7 @@ build step. Os arquivos do repositório **são** o site que vai pro ar.
 ```
 index.html         → página principal (home, fundadores, metodologia, artigos, vídeos, contato)
 materiais.html     → biblioteca de PDFs (com gate de senha)
+diagnostico.html   → autodiagnóstico de maturidade de gestão (questionário + gate de lead + resultado; conteúdo no bloco de dados do JS)
 css/tokens.css     → design tokens (cores, tipografia, espaçamento) — variáveis CSS
 css/site.css       → todo o estilo do site
 assets/            → logos, fotos, capas de vídeo

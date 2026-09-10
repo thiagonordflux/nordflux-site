@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="nordflux" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico de Maturidade do Modelo de Gestão · NordFlux</title>
+  <meta name="description" content="Responda 18 perguntas e receba um diagnóstico do modelo de gestão da sua empresa, com base nos 4 sinais do Diagnóstico de Gestão da NordFlux.">
+  <link rel="icon" type="image/png" href="assets/logo-3d-symbol.png">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+
+  <style>
+    /* Ajustes locais: ícones SVG inline e estados usados só nesta página */
+    .btn svg { width: 16px; height: 16px; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+    .nav-back svg { width: 16px; height: 16px; }
+    .narrow { max-width: 820px; margin: 0 auto; }
+
+    /* ═══════════════════════════════════════════════════════════
+       DIAGNÓSTICO — estilos próprios desta página (prefixo dm-)
+       ═══════════════════════════════════════════════════════════ */
+    .dm-screen { display: none; padding: 136px 0 96px; min-height: 100vh; }
+    .dm-screen.active { display: block; }
+
+    /* Hero / intro */
+    .dm-hero { text-align: center; max-width: 780px; margin: 0 auto; position: relative; }
+    .dm-hero-bg { position: absolute; inset: -140px -200px auto; height: 520px; pointer-events: none; background: radial-gradient(ellipse 60% 55% at 50% 20%, var(--color-copper-glow) 0%, transparent 70%); }
+    .dm-hero > :not(.dm-hero-bg) { position: relative; }
+    .dm-hero h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 22px 0; }
+    .dm-hero h1 em { font-style: normal; background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .dm-lead { color: var(--fg-secondary); font-size: var(--text-md); line-height: var(--leading-relaxed); text-wrap: pretty; }
+    .dm-hint { font-family: var(--font-tagline); font-style: italic; color: var(--color-accent-hi); font-size: var(--text-md); margin-top: 24px; }
+    .dm-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin: 32px 0 36px; }
+    .dm-meta span { display: inline-flex; align-items: center; gap: 8px; color: var(--fg-muted); font-size: var(--text-sm); }
+    .dm-meta svg { width: 15px; height: 15px; color: var(--color-accent); }
+    .dm-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; text-align: left; }
+    .dm-block { border-top: 1px solid var(--border-subtle); padding-top: 18px; }
+    .dm-block strong { display: block; font-family: var(--font-display); font-size: var(--text-sm-mid); font-weight: 600; margin-bottom: 6px; }
+    .dm-block span { display: block; color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+    .dm-block small { display: block; color: var(--color-accent); font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+
+    /* Progresso */
+    .dm-progress { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    .dm-progress-label { font-size: var(--text-xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--fg-muted); font-weight: 500; white-space: nowrap; }
+    .dm-progress-track { flex: 1; height: 3px; background: var(--bg-track); border-radius: var(--radius-full); overflow: hidden; }
+    .dm-progress-bar { height: 100%; background: var(--gradient-accent-h); width: 0; transition: width 300ms ease; }
+
+    /* Etapa */
+    .dm-step-head { margin-bottom: 36px; }
+    .dm-step-head h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 14px 0 12px; }
+    .dm-step-head p { color: var(--fg-secondary); font-size: var(--text-md-sm); line-height: var(--leading-relaxed); max-width: 640px; text-wrap: pretty; }
+
+    .dm-q { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 24px 26px; margin-bottom: 14px; transition: border-color var(--transition-base); }
+    .dm-q.answered { border-color: var(--border-accent); }
+    .dm-q-text { font-size: var(--text-md-sm); line-height: var(--leading-normal); margin-bottom: 16px; color: var(--fg-primary); font-weight: 400; text-wrap: pretty; }
+    .dm-q-num { color: var(--color-accent); font-weight: 600; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); margin-right: 10px; }
+    .dm-opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .dm-opts.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .dm-opts.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .dm-opt { position: relative; }
+    .dm-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .dm-opt label {
+      display: flex; align-items: center; justify-content: center; text-align: center; min-height: 48px;
+      padding: 10px 12px; border: 1px solid var(--border-default); border-radius: var(--radius-sm);
+      font-size: var(--text-sm); color: var(--fg-secondary); cursor: pointer; user-select: none; line-height: var(--leading-snug);
+      transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    }
+    .dm-opt label:hover { border-color: var(--border-accent); color: var(--fg-primary); }
+    .dm-opt input:checked + label { border-color: var(--color-accent); background: var(--color-accent-subtle); color: var(--fg-primary); font-weight: 400; }
+    .dm-opt input:focus-visible + label { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+    .dm-opt-big label { min-height: 72px; flex-direction: column; gap: 4px; padding: 14px; }
+    .dm-opt-big label small { color: var(--fg-muted); font-size: var(--text-xs-mid); }
+
+    .dm-scale-legend { display: flex; justify-content: space-between; color: var(--fg-muted); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 4px 2px 14px; }
+
+    .dm-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 32px; }
+    .dm-error { display: none; font-size: var(--text-xs); color: var(--color-error); background: var(--color-error-tint-bg); border: 1px solid var(--color-error-tint-border); padding: 10px 14px; border-radius: var(--radius-sm); line-height: var(--leading-snug); margin-top: 16px; }
+    .dm-error.show { display: block; }
+
+    /* Gate */
+    .dm-gate { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .dm-gate h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.8vw, 2.1rem); font-weight: 500; line-height: var(--leading-tight); margin: 14px 0 16px; }
+    .dm-gate p.lead { color: var(--fg-secondary); font-size: var(--text-md-sm); line-height: var(--leading-relaxed); margin-bottom: 24px; text-wrap: pretty; }
+    .dm-preview { background: var(--bg-panel); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 26px 28px; margin-top: 8px; }
+    .dm-preview-title { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: 16px; }
+    .dm-preview-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 0; border-top: 1px solid var(--border-subtle); font-size: var(--text-sm-mid); color: var(--fg-secondary); }
+    .dm-preview-row strong { color: var(--fg-primary); font-weight: 400; }
+    .dm-preview-row .dm-blur { filter: blur(6px); user-select: none; }
+    .dm-preview-note { font-family: var(--font-tagline); font-style: italic; color: var(--color-accent-hi); font-size: var(--text-md-sm); margin-top: 18px; }
+    .dm-form { display: grid; gap: 16px; }
+    .dm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .dm-privacy { font-size: var(--text-xs); color: var(--fg-muted); line-height: var(--leading-snug); max-width: 440px; }
+    .dm-proto { display: none; font-size: var(--text-xs); color: var(--color-warning); background: var(--color-warning-tint-bg); border: 1px solid var(--color-warning-tint-border); padding: 10px 14px; border-radius: var(--radius-sm); line-height: var(--leading-snug); }
+    .dm-proto.show { display: block; }
+    .netlify-hidden { display: none; }
+
+    /* Resultado */
+    .dm-result-head { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; padding-bottom: 36px; border-bottom: 1px solid var(--border-default); margin-bottom: 48px; }
+    .dm-result-head h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 2.8rem); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 14px 0 12px; }
+    .dm-result-head h1 em { font-style: normal; background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .dm-result-head p { color: var(--fg-secondary); font-size: var(--text-md-sm); max-width: 620px; text-wrap: pretty; }
+    .dm-score { text-align: center; background: var(--bg-card); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 22px 34px; min-width: 200px; }
+    .dm-score-n { font-family: var(--font-display); font-weight: 600; font-size: var(--text-4xl); line-height: 1; background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .dm-score-l { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--fg-muted); margin-top: 8px; font-weight: 600; }
+
+    .dm-sec { margin-bottom: 64px; }
+    .dm-sec h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 12px 0 10px; }
+    .dm-sec > p.sub { color: var(--fg-secondary); font-size: var(--text-md-sm); line-height: var(--leading-relaxed); max-width: 680px; margin-bottom: 26px; text-wrap: pretty; }
+
+    .dm-signals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .dm-sig { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 20px; }
+    .dm-sig.presente { border-color: var(--border-accent); }
+    .dm-sig-num { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); font-weight: 600; }
+    .dm-sig-title { display: block; font-family: var(--font-display); font-size: var(--text-sm-mid); font-weight: 600; line-height: var(--leading-snug); margin: 8px 0 14px; min-height: 2.5em; }
+    .dm-bar { height: 6px; background: var(--bg-track); border-radius: var(--radius-full); overflow: hidden; }
+    .dm-bar > i { display: block; height: 100%; border-radius: var(--radius-full); background: var(--gradient-accent-h); }
+    .dm-sig-status { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: var(--text-xs-mid); color: var(--fg-muted); }
+    .dm-badge { display: inline-block; font-size: var(--text-2xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; font-weight: 600; padding: 3px 8px; border-radius: var(--radius-xs); border: 1px solid var(--border-default); color: var(--fg-secondary); }
+    .dm-badge.presente { border-color: var(--color-status-critical); color: #fca5a5; }
+    .dm-badge.atencao { border-color: var(--color-status-warning); color: #fde68a; }
+    .dm-badge.ausente { border-color: var(--color-status-good); color: #86efac; }
+
+    .dm-callout { background: var(--bg-panel); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 24px 28px; margin-top: 22px; }
+    .dm-callout-label { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: 10px; }
+    .dm-callout p { color: var(--fg-primary); font-size: var(--text-md-sm); line-height: var(--leading-relaxed); text-wrap: pretty; }
+    .dm-callout.accent { background: var(--color-accent-subtle); border-color: var(--border-accent); }
+
+    .dm-detail { border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--bg-card); margin-bottom: 16px; overflow: hidden; }
+    .dm-detail.prioridade { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+    .dm-detail-head { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; padding: 22px 26px; cursor: pointer; }
+    .dm-detail-head:hover { background: var(--bg-elevated); }
+    .dm-detail-n { font-family: var(--font-tagline); font-style: italic; font-size: var(--text-3xl); color: var(--color-accent-hi); line-height: 1; min-width: 36px; text-align: center; }
+    .dm-detail-t { font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; line-height: var(--leading-snug); }
+    .dm-detail-t small { display: block; font-family: var(--font-body); font-size: var(--text-xs-mid); color: var(--fg-muted); font-weight: 400; margin-top: 4px; letter-spacing: var(--tracking-wide); }
+    .dm-detail-chev { width: 18px; height: 18px; color: var(--fg-muted); transition: transform var(--transition-base); }
+    .dm-detail.open .dm-detail-chev { transform: rotate(180deg); }
+    .dm-detail-body { display: none; padding: 0 26px 26px; border-top: 1px solid var(--border-subtle); }
+    .dm-detail.open .dm-detail-body { display: block; }
+    .dm-detail-body h4 { font-family: var(--font-display); font-size: var(--text-md-sm); font-weight: 600; margin: 24px 0 8px; }
+    .dm-detail-body p { color: var(--fg-secondary); font-size: var(--text-sm-mid); line-height: var(--leading-relaxed); text-wrap: pretty; }
+    .dm-list { list-style: none; border-left: 2px solid var(--color-accent); padding-left: 18px; margin-top: 8px; }
+    .dm-list li { color: var(--fg-secondary); font-size: var(--text-sm-mid); line-height: var(--leading-relaxed); padding: 3px 0; }
+    .dm-list li::before { content: '— '; color: var(--color-accent); }
+    .dm-test { background: var(--bg-panel); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 8px; }
+    .dm-test-label { font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: 6px; }
+    .dm-muda { background: var(--color-accent-subtle); border-left: 2px solid var(--color-accent); padding: 14px 18px; margin-top: 20px; font-size: var(--text-sm-mid); color: var(--fg-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .dm-muda b { display: block; font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); margin-bottom: 4px; }
+
+    .dm-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm-mid); }
+    .dm-table th { text-align: left; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--color-accent); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border-default); background: var(--bg-panel); }
+    .dm-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-secondary); vertical-align: top; line-height: var(--leading-normal); }
+    .dm-table td:first-child { color: var(--fg-primary); font-weight: 400; white-space: nowrap; }
+    .dm-table tr.hl td { background: var(--color-accent-subtle); color: var(--fg-primary); }
+    .dm-table-wrap { overflow-x: auto; border: 1px solid var(--border-default); border-radius: var(--radius-md); }
+
+    .dm-painel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+    .dm-pcard { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 20px 22px; }
+    .dm-pcard.falta { border-color: var(--color-status-warning); }
+    .dm-pcard .dm-badge { margin-bottom: 12px; }
+    .dm-pcard strong { display: block; font-family: var(--font-display); font-size: var(--text-md-sm); font-weight: 600; margin-bottom: 6px; }
+    .dm-pcard p { color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+    .dm-pcard .ex { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle); font-size: var(--text-sm); color: var(--fg-primary); }
+    .dm-pcard .ex small { display: block; color: var(--fg-muted); font-size: var(--text-2xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: 4px; }
+
+    .dm-erros { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .dm-erro { border-top: 1px solid var(--border-subtle); padding-top: 16px; }
+    .dm-erro b { display: block; font-family: var(--font-tagline); font-style: italic; font-size: var(--text-xl); color: var(--color-accent-hi); line-height: 1; margin-bottom: 8px; }
+    .dm-erro strong { display: block; font-size: var(--text-sm-mid); font-weight: 600; margin-bottom: 6px; line-height: var(--leading-snug); }
+    .dm-erro p { color: var(--fg-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+
+    .dm-cta { text-align: center; max-width: 660px; margin: 0 auto; padding-top: 48px; border-top: 1px solid var(--border-default); }
+    .dm-cta-quote { font-family: var(--font-tagline); font-style: italic; font-size: var(--text-lg); line-height: var(--leading-snug); margin: 18px 0 16px; text-wrap: pretty; }
+    .dm-cta > p { color: var(--fg-secondary); font-size: var(--text-sm-mid); line-height: var(--leading-relaxed); margin-bottom: 28px; }
+    .dm-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .dm-tools { display: flex; gap: 20px; justify-content: flex-end; margin-bottom: 20px; }
+
+    @media (max-width: 980px) {
+      .container { padding: 0 32px; }
+      .dm-gate { grid-template-columns: 1fr; gap: 40px; }
+      .dm-signals { grid-template-columns: repeat(2, 1fr); }
+      .dm-erros { grid-template-columns: repeat(2, 1fr); }
+      .dm-painel { grid-template-columns: 1fr; }
+      .dm-blocks { grid-template-columns: 1fr; }
+      .dm-result-head { grid-template-columns: 1fr; }
+      .dm-score { justify-self: start; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 14px 24px; }
+      .container { padding: 0 24px; }
+      .dm-screen { padding-top: 104px; }
+      .dm-opts, .dm-opts.cols-3 { grid-template-columns: 1fr 1fr; }
+      .dm-row { grid-template-columns: 1fr; }
+      .dm-signals, .dm-erros { grid-template-columns: 1fr; }
+      .dm-actions { flex-direction: column-reverse; align-items: stretch; }
+      .dm-actions .btn { width: 100%; }
+      .dm-detail-head { grid-template-columns: auto 1fr; }
+      .dm-detail-chev { display: none; }
+    }
+
+    @media print {
+      .atmos, .nav, footer, .dm-tools, .dm-cta-actions, .dm-detail-chev { display: none !important; }
+      body { background: #fff; color: #111; }
+      .dm-screen { padding: 0; min-height: auto; }
+      .dm-detail-body { display: block !important; }
+      .dm-sig, .dm-detail, .dm-pcard, .dm-callout, .dm-score, .dm-table-wrap, .dm-q { background: #fff; border-color: #ccc; break-inside: avoid; }
+      .dm-callout p, .dm-detail-body p, .dm-list li, .dm-table td, .dm-pcard p, .dm-erro p, .dm-sec > p.sub, .dm-result-head p { color: #333; }
+      .dm-sig-title, .dm-detail-t, .dm-pcard strong, .dm-sec h2, .dm-result-head h1, .dm-muda, .dm-table td:first-child { color: #111; }
+      .dm-result-head h1 em, .dm-score-n { -webkit-text-fill-color: #8B4430; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="atmos"></div>
+
+  <!-- Detecção do formulário pela Netlify (mesmo padrão do 360.html). Precisa existir no HTML estático. -->
+  <form class="netlify-hidden" name="diagnostico-maturidade" netlify netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="diagnostico-maturidade">
+    <input type="text" name="bot-field">
+    <input type="text" name="nome">
+    <input type="email" name="email">
+    <input type="text" name="empresa">
+    <input type="text" name="cargo">
+    <input type="tel" name="telefone">
+    <input type="hidden" name="tipo_negocio">
+    <input type="hidden" name="leitura">
+    <input type="hidden" name="sinais_presentes">
+    <input type="hidden" name="pontuacao_sinais">
+    <input type="hidden" name="pontuacao_painel">
+    <input type="hidden" name="respostas">
+  </form>
+
+  <nav class="nav" id="navbar">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark">
+      <span class="brand-word">NordFlux</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      Voltar ao site
+    </a>
+  </nav>
+
+  <!-- ══════════════ TELA 1 · INTRO ══════════════ -->
+  <section class="dm-screen active" id="screen-intro">
+    <div class="container">
+      <div class="dm-hero">
+        <div class="dm-hero-bg"></div>
+        <p class="eyebrow centered">Diagnóstico de Maturidade · Modelo de Gestão</p>
+        <h1>Sua empresa não está tendo<br>o desempenho que <em>você espera?</em></h1>
+        <p class="dm-lead">Em 18 perguntas, este diagnóstico identifica quais dos 4 sinais estão presentes na sua empresa, se o painel de indicadores existe de fato, e por onde começar nos próximos 30 dias. A distinção importa porque muda o remédio: problema de cultura se trata com conversa. Problema de modelo se trata com desenho.</p>
+        <p class="dm-hint">Responda pensando na sua empresa como ela é hoje, não como deveria ser.</p>
+
+        <div class="dm-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Cerca de 5 minutos</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>18 perguntas em 6 etapas</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Diagnóstico com plano de 30 dias</span>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="btnStart">
+          Começar o diagnóstico
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+
+        <div class="dm-blocks">
+          <div class="dm-block"><small>Etapas 1 a 4</small><strong>Os 4 sinais</strong><span>Como cada sinal aparece na prática: reuniões, prioridades, números e a dependência do dono.</span></div>
+          <div class="dm-block"><small>Etapa 5</small><strong>O painel e o ritual</strong><span>Se existem os três indicadores, com dono, meta e prazo, e o ritual semanal que os transforma em decisão.</span></div>
+          <div class="dm-block"><small>Resultado</small><strong>Leitura e primeira correção</strong><span>Onde a energia de correção rende mais, o teste de 5 minutos e o que fazer nos próximos 30 dias.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TELA 2 · QUESTIONÁRIO ══════════════ -->
+  <section class="dm-screen" id="screen-quiz">
+    <div class="container">
+      <div class="narrow">
+        <div class="dm-progress">
+          <span class="dm-progress-label" id="progressLabel">Etapa 1 de 6</span>
+          <div class="dm-progress-track"><div class="dm-progress-bar" id="progressBar"></div></div>
+        </div>
+        <div id="stepMount"></div>
+        <p class="dm-error" id="quizError">Responda todas as perguntas desta etapa para continuar.</p>
+        <div class="dm-actions">
+          <button type="button" class="btn btn-ghost" id="btnPrev">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            Voltar
+          </button>
+          <button type="button" class="btn btn-primary" id="btnNext">
+            Continuar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TELA 3 · CAPTAÇÃO (gate) ══════════════ -->
+  <section class="dm-screen" id="screen-lead">
+    <div class="container">
+      <div class="dm-gate">
+        <div>
+          <p class="eyebrow">Diagnóstico pronto</p>
+          <h2>Seu diagnóstico está<br>calculado. Para onde enviamos?</h2>
+          <p class="lead">Preencha seus dados para ver o resultado completo: a leitura dos sinais, o teste de 5 minutos de cada um, a primeira correção aplicável na próxima semana e o plano de 30 dias.</p>
+
+          <div class="dm-preview">
+            <div class="dm-preview-title">Prévia do resultado</div>
+            <div class="dm-preview-row"><span>Sinais identificados</span><strong id="pvSinais">—</strong></div>
+            <div class="dm-preview-row"><span>Leitura do modelo de gestão</span><strong class="dm-blur">Diagnóstico de modelo</strong></div>
+            <div class="dm-preview-row"><span>Por onde começar</span><strong class="dm-blur">Sinal com maior intensidade</strong></div>
+            <div class="dm-preview-row"><span>Painel dos 3 indicadores</span><strong class="dm-blur">O que falta instalar</strong></div>
+            <p class="dm-preview-note">A contagem não é um julgamento da sua empresa. É uma indicação de onde a energia de correção rende mais.</p>
+          </div>
+        </div>
+
+        <div>
+          <form class="dm-form" id="leadForm" name="diagnostico-maturidade" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="diagnostico-maturidade">
+            <p class="netlify-hidden"><label>Não preencha: <input name="bot-field"></label></p>
+            <input type="hidden" name="tipo_negocio" id="fTipo">
+            <input type="hidden" name="leitura" id="fLeitura">
+            <input type="hidden" name="sinais_presentes" id="fSinais">
+            <input type="hidden" name="pontuacao_sinais" id="fPontSinais">
+            <input type="hidden" name="pontuacao_painel" id="fPontPainel">
+            <input type="hidden" name="respostas" id="fRespostas">
+
+            <div class="field">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
+            </div>
+            <div class="dm-row">
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@empresa.com.br" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(54) 99999-9999" autocomplete="tel" inputmode="tel" required>
+              </div>
+            </div>
+            <div class="dm-row">
+              <div class="field">
+                <label for="empresa">Empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" autocomplete="organization" required>
+              </div>
+              <div class="field">
+                <label for="cargo">Cargo</label>
+                <select id="cargo" name="cargo" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>CEO / Dono</option>
+                  <option>Diretor</option>
+                  <option>Gerente</option>
+                  <option>Coordenador / Líder</option>
+                  <option>Analista / Especialista</option>
+                  <option>Consultor</option>
+                  <option>Professor / Educador</option>
+                  <option>Empreendedor</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <p class="dm-error" id="leadError">Preencha todos os campos para ver o diagnóstico.</p>
+            <p class="dm-proto" id="protoNotice">Modo protótipo: aberto fora da Netlify, o envio do formulário é simulado e o resultado aparece mesmo assim. Hospedado em nordflux.co, os dados chegam pelo Netlify Forms.</p>
+            <button type="submit" class="btn btn-primary" id="leadSubmit" style="justify-self:start">
+              <span class="btn-label">Ver meu diagnóstico</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <p class="dm-privacy">Sem spam. Usamos seus dados apenas para enviar o diagnóstico e material da NordFlux. Você pode sair quando quiser.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TELA 4 · RESULTADO ══════════════ -->
+  <section class="dm-screen" id="screen-result">
+    <div class="container">
+      <div class="dm-tools">
+        <button type="button" class="btn btn-ghost" id="btnPrint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Salvar em PDF
+        </button>
+        <button type="button" class="btn btn-ghost" id="btnRestart">Refazer o diagnóstico</button>
+      </div>
+      <div id="resultMount"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-3d-symbol.png" alt="" class="brand-mark" style="width:32px;height:32px;">
+        <div class="footer-brand-stack">
+          <div class="brand-word" style="font-size: 18px;">NordFlux</div>
+          <div class="tagline-serif">Find your North — Flow with Purpose</div>
+        </div>
+      </a>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/company/nordflux-co" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/nordflux.co/" target="_blank" rel="noopener">Instagram</a>
+        <a href="palestras.html">Palestras</a>
+        <a href="materiais.html">Materiais</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <p class="footer-copy">© 2026 NordFlux Consultoria Ltda. · CNPJ 63.130.623/0001-07</p>
+    </div>
+  </footer>
+
+  <script>
+  /* ═══════════════════════════════════════════════════════════════
+     CONTEÚDO DO DIAGNÓSTICO
+     Fonte: "Diagnóstico dos 4 Sinais" (PDF, NordFlux, material do
+     Empreenda X360) e da antiga página /x360. Todo texto abaixo vem de lá.
+     Para validar/ajustar as informações, edite apenas este bloco.
+     ═══════════════════════════════════════════════════════════════ */
+
+  // Escala de frequência usada nas etapas 1 a 4 (valor = pontos)
+  const ESCALA = [
+    { v: 0, t: 'Não acontece' },
+    { v: 1, t: 'Acontece às vezes' },
+    { v: 2, t: 'Acontece com frequência' },
+    { v: 3, t: 'É a regra' }
+  ];
+
+  // Regras de pontuação (ajustáveis)
+  const REGRAS = {
+    maxSinal: 9,          // 3 afirmações × 3 pontos
+    limiarPresente: 5,    // sinal conta como "marcado" a partir deste valor
+    limiarAtencao: 3,     // abaixo de "presente" e a partir daqui: ponto de atenção
+    maxPainel: 10         // 5 perguntas × 2 pontos
+  };
+
+  const TIPOS_NEGOCIO = [
+    { id: 'comercio',   t: 'Comércio e varejo',        resultado: 'Margem por categoria',            causa: 'Taxa de conversão em loja',           execucao: '% de compromissos concluídos' },
+    { id: 'servicos',   t: 'Serviços e consultoria',   resultado: 'Horas faturáveis sobre horas totais', causa: 'Propostas enviadas por semana',   execucao: '% de compromissos concluídos' },
+    { id: 'industria',  t: 'Indústria',                resultado: 'Margem de contribuição',           causa: 'Índice de retrabalho',                execucao: '% de compromissos concluídos' },
+    { id: 'software',   t: 'Software e tecnologia',    resultado: 'Receita recorrente líquida',       causa: 'Ativação nos primeiros 30 dias',      execucao: '% de compromissos concluídos' },
+    { id: 'logistica',  t: 'Distribuição e logística', resultado: 'Custo por entrega',                causa: 'Pedidos no prazo',                    execucao: '% de compromissos concluídos' },
+    { id: 'outro',      t: 'Outro tipo de negócio',    resultado: null, causa: null, execucao: '% de compromissos concluídos' }
+  ];
+
+  const SINAIS = [
+    {
+      n: 1,
+      titulo: 'As reuniões acontecem, mas as decisões não saem do papel',
+      curto: 'Reuniões sem decisão',
+      afirmacoes: [
+        'A mesma pauta reaparece em três reuniões seguidas, com pequenas variações.',
+        'A ata registra “alinhamos que…” em vez de “fulano entrega X até o dia Y”.',
+        'Ninguém consegue dizer de cabeça, sem consultar nada, o que foi decidido na última reunião.'
+      ],
+      porque: 'A reunião foi desenhada para alinhar, não para decidir. E alinhamento é infinito: sempre cabe mais uma rodada de contexto, sempre falta ouvir mais uma área. Decisão, ao contrário, tem custo: alguém assume um prazo, alguém abre mão de um recurso, alguém pode errar em público. Quando o formato da reunião não obriga esse custo a aparecer, o grupo encontra naturalmente o equilíbrio mais confortável, que é continuar discutindo. Não é falta de vontade. É o desenho funcionando exatamente como foi construído.',
+      teste: 'Abra as atas das suas últimas três reuniões e conte quantos itens têm, ao mesmo tempo, um nome próprio, uma data e um resultado observável. Se menos da metade tiver os três, você não tem reuniões de decisão. Tem reuniões de alinhamento com nome de reunião de decisão.',
+      correcao: [
+        'Reserve os últimos 5 minutos de toda reunião para o fechamento, e trate esse bloco como inegociável.',
+        'Cada item vira uma linha única: o que será feito, quem faz, até quando, e como saberemos que aconteceu.',
+        'Só o que couber nesse formato entra na ata. O restante foi conversa, e conversa não precisa de registro.',
+        'Leia as linhas em voz alta antes de encerrar. Quem discordar, discorda ali, não no grupo depois.'
+      ],
+      muda: 'A pauta encolhe. Itens que viram decisão não voltam, e o tempo que sobra passa a ser usado nos temas que realmente precisam de discussão longa.'
+    },
+    {
+      n: 2,
+      titulo: 'Cada um tem a sua versão das prioridades',
+      curto: 'Prioridades divergentes',
+      afirmacoes: [
+        'Perguntando separadamente a três pessoas quais são as prioridades do trimestre, você recebe três listas diferentes.',
+        'Todo pedido interno chega com a palavra “urgente” colada nele.',
+        'Projetos chegam a 80% e param, porque a pessoa foi puxada para outro 80%.'
+      ],
+      porque: 'A empresa listou o que importa, mas nunca definiu o que vem antes. Prioridade não é uma lista de temas relevantes: é uma ordem. E ordem exige dizer não, ou pelo menos “agora não”, a coisas legítimas. Enquanto essa ordem não existir de forma explícita e pública, cada pessoa vai usar a régua que tem à mão: o que o chefe pediu por último, o que o cliente gritou mais alto, o que está mais perto de terminar. Todas essas réguas são razoáveis. Elas só não são a mesma.',
+      teste: 'Mande hoje a mesma mensagem para três pessoas de áreas diferentes: “quais são as três prioridades da empresa neste trimestre? responde de cabeça, sem consultar nada.” O tamanho da divergência entre as respostas é o tamanho do problema.',
+      correcao: [
+        'Escreva as três prioridades do trimestre numeradas, 1, 2, 3, e não em bullet points.',
+        'A numeração não é estética: ela força a escolha que a lista permite evitar.',
+        'Publique onde todos vejam, e repita a lista na abertura de toda reunião de gestão.',
+        'Quando algo novo aparecer, a pergunta passa a ser: isso entra no lugar de qual dos três?'
+      ],
+      muda: '“Não” e “agora não” viram respostas legítimas, ditas sem culpa e sem negociação de bastidor, porque passam a ter um critério público por trás.'
+    },
+    {
+      n: 3,
+      titulo: 'Os números existem, mas ninguém sabe o que fazer com eles',
+      curto: 'Números sem ação',
+      afirmacoes: [
+        'O relatório mensal é apresentado, comentado, arquivado, e nada muda por causa dele.',
+        'Todo indicador do painel é de resultado: faturamento, margem, inadimplência, volume.',
+        'Quando um número piora, a discussão vira busca de explicação, não escolha de ação.'
+      ],
+      porque: 'Indicadores de resultado contam o passado. Quando você descobre que a margem caiu, a causa disso aconteceu há sessenta ou noventa dias, e o que estiver ao seu alcance hoje só vai aparecer no número daqui a outros sessenta. Um painel feito só de resultados é um retrovisor muito bem construído: informa com precisão, mas não dirige. O que falta não é mais dado. É indicador de causa: algo que você faz agora e que move o resultado depois.',
+      teste: 'Pegue o seu painel atual e classifique cada indicador em duas colunas: mede algo que já aconteceu, ou mede algo que você faz agora e que muda o resultado lá na frente? Se a segunda coluna estiver vazia, você tem um relatório, não um painel de gestão.',
+      correcao: [
+        'Escolha o seu indicador de resultado mais importante, apenas um.',
+        'Pergunte à equipe: o que precisa acontecer nas próximas semanas para esse número melhorar?',
+        'A resposta mais concreta que surgir é o seu primeiro indicador de causa. Comece a medir na semana seguinte.',
+        'Aceite que a primeira versão vai estar imprecisa. Indicador de causa se calibra com uso, não com planejamento.'
+      ],
+      muda: 'A reunião de números deixa de ser prestação de contas sobre o passado e passa a ser decisão sobre as próximas semanas.'
+    },
+    {
+      n: 4,
+      titulo: 'Você ainda precisa estar presente para tudo acontecer',
+      curto: 'Dependência do dono',
+      afirmacoes: [
+        'Você volta de uma semana fora e encontra decisões represadas, esperando por você.',
+        'As pessoas trazem problemas bem descritos, mas não trazem recomendações.',
+        'Você sabe coisas sobre o negócio que não estão escritas em lugar nenhum.'
+      ],
+      porque: 'Quase nunca é falta de gente boa. É falta de critério explícito. As pessoas não decidem porque não sabem onde fica o limite, de valor, de risco, de exceção, e, na dúvida, perguntar é sempre mais seguro do que errar. Elas estão sendo racionais dentro das regras que existem. O gargalo não é a sua agenda: é o fato de que o critério de decisão mora na sua cabeça e não foi escrito em nenhum lugar de onde outra pessoa pudesse tirá-lo.',
+      teste: 'Nas próximas duas semanas, anote toda decisão que chegou até você, inclusive as de trinta segundos. No fim, marque quais realmente exigiam o dono da empresa. A diferença entre as duas listas é o tamanho exato do gargalo, e costuma surpreender.',
+      correcao: [
+        'Escolha os três tipos de decisão que mais chegam até você.',
+        'Para cada um, escreva o critério: até que valor, dentro de que condições, com qual exceção.',
+        'Delegue o critério, não a tarefa. Quem recebe critério decide sozinho na próxima vez.',
+        'Combine uma revisão: você olha as decisões tomadas uma vez por semana, depois do fato, não antes.'
+      ],
+      muda: 'Você passa a decidir menos e a revisar mais, e a empresa ganha a capacidade de funcionar nas semanas em que você não estiver.'
+    }
+  ];
+
+  // Etapa 5 · O painel e o ritual (Sim = 2, Em parte = 1, Não = 0)
+  const PAINEL = [
+    { id: 'resultado', pergunta: 'A empresa acompanha toda semana um indicador de resultado (o número que prova que o esforço valeu a pena), com um dono com nome e sobrenome, uma meta numérica e um prazo?', tipo: 'Resultado', descricao: 'O número que prova. Mede o que já aconteceu e costuma ser financeiro.' },
+    { id: 'causa', pergunta: 'Existe um indicador de causa: algo que vocês fazem agora e que muda o indicador de resultado em 30 a 90 dias?', tipo: 'Causa', descricao: 'O que move o resultado. É o mais difícil de escolher e o que mais muda a conversa da reunião.' },
+    { id: 'execucao', pergunta: 'Vocês medem o percentual dos compromissos da semana anterior que foram concluídos no prazo?', tipo: 'Execução', descricao: 'O que saiu do papel. É o único indicador que mede o próprio modelo de gestão, e não o negócio.' },
+    { id: 'ritual', pergunta: 'Existe um ritual semanal fixo, sempre no mesmo dia e horário, em que esses números viram decisão e cada ação sai escrita com responsável e prazo?', tipo: 'Ritual', descricao: 'O que sustenta o painel. Um painel sem ritual vira planilha abandonada em duas semanas.' },
+    { id: 'vitais', pergunta: 'Existem sinais vitais com limite definido (por exemplo: caixa livre, concentração de receita, endividamento ou retenção de gente-chave) que são verificados na abertura do ritual?', tipo: 'Sinais vitais', descricao: 'O que o painel não vê. Existem para não atropelar, e não recebem meta de crescimento.' }
+  ];
+  const ESCALA_PAINEL = [
+    { v: 2, t: 'Sim, existe e funciona' },
+    { v: 1, t: 'Em parte' },
+    { v: 0, t: 'Não' }
+  ];
+
+  // Leitura do resultado pela contagem de sinais (PDF, p. 7)
+  const LEITURAS = {
+    baixa: { faixa: '0 a 1 sinal', titulo: 'O modelo está funcionando', texto: 'Trate o sinal isolado como ponto de atenção e acompanhe. Sinais isolados costumam ser os primeiros a aparecer quando a empresa entra num novo ciclo de crescimento.' },
+    media: { faixa: '2 sinais', titulo: 'O modelo funciona, mas no limite', texto: 'Normalmente sustentado por esforço pessoal de duas ou três pessoas-chave. Funciona enquanto elas estiverem inteiras e presentes, e essa é exatamente a fragilidade.' },
+    alta:  { faixa: '3 a 4 sinais', titulo: 'O diagnóstico é de modelo de gestão', texto: 'Investir em treinamento, discurso ou engajamento vai gerar melhora temporária e regressão em poucas semanas, porque a estrutura que produz o comportamento continua intacta.' }
+  };
+  const ALERTA_LEITURA = 'Vale um alerta sobre a tentação mais comum: atacar os quatro sinais ao mesmo tempo. Não funciona, porque os quatro competem pelo mesmo recurso escasso, que é a atenção da liderança. Existe um único mecanismo, o painel dos três indicadores e o ritual semanal que o sustenta, que atinge os quatro por tabela. É por ele que se começa.';
+  const RESSALVA = 'Nenhum dos quatro sinais indica má gestão. Todos eles são consequências normais de uma empresa que cresceu mais rápido do que o seu modelo de decisão. É um problema de estágio, não de competência, e por isso tem solução conhecida.';
+  const TRES_REGRAS = 'Cada indicador tem um dono com nome e sobrenome, não uma área. Cada um tem uma meta numérica e um prazo. E os três são revisados na mesma frequência, toda semana, no mesmo horário. Indicador sem dono não é indicador: é curiosidade.';
+
+  const SINAIS_VITAIS = [
+    { s: 'Caixa livre', r: 'Quantos dias a empresa opera sem receita nova entrar', l: 'Nunca abaixo de X dias' },
+    { s: 'Concentração de receita', r: 'O quanto o negócio depende de um só cliente', l: 'Nenhum cliente acima de X%' },
+    { s: 'Endividamento', r: 'Se o crescimento é financiado de forma sustentável', l: 'Dívida nunca acima de X vezes o resultado' },
+    { s: 'Retenção de gente-chave', r: 'Se a operação está consumindo quem a sustenta', l: 'Nenhuma saída voluntária em posição crítica' }
+  ];
+
+  const RITUAL = [
+    { t: '0 a 1 min', b: 'Sinais vitais', o: 'Algum limite foi cruzado desde a semana passada? Se não, segue a pauta. Se sim, o restante do roteiro é suspenso e a reunião inteira passa a ser sobre isso.' },
+    { t: '1 a 6 min', b: 'Execução', o: 'O que foi combinado na semana passada, o que saiu e o que não saiu. Sem justificativa longa: o objetivo aqui é o número, não a narrativa.' },
+    { t: '6 a 15 min', b: 'Os três números', o: 'Cada dono apresenta o seu indicador e diz apenas uma coisa: está no rumo ou está fora. Quem está no rumo não precisa explicar por quê.' },
+    { t: '15 a 25 min', b: 'Só o que está fora', o: 'Para cada indicador fora do rumo: qual é a causa provável e qual é a ação desta semana. Se o tema exigir mais de dez minutos, marca-se uma conversa separada e segue.' },
+    { t: '25 a 30 min', b: 'Fechamento', o: 'Cada ação vira uma linha com o que será feito, quem faz e até quando. Escrito na hora, lido em voz alta, enviado antes de todos saírem da sala.' }
+  ];
+
+  const PLANO_30 = [
+    { q: 'Semana 1', f: 'Escolher', o: 'Defina os três indicadores com a sua liderança em uma conversa de uma hora. Atribua um dono a cada um e defina, na mesma conversa, os dois ou três sinais vitais com seus limites. Não construa dashboard: uma planilha compartilhada basta e é melhor.' },
+    { q: 'Semana 2', f: 'Começar', o: 'Primeiro ritual de 30 minutos. Os números vão estar incompletos e tudo bem: o objetivo desta semana é a existência do ritual, não a qualidade do dado.' },
+    { q: 'Semana 3', f: 'Corrigir', o: 'Segundo ritual. Aqui aparece o que não funciona: indicador difícil de apurar, dono errado, meta irreal. Ajuste o que for mecânico e não mexa nos indicadores ainda.' },
+    { q: 'Semana 4', f: 'Sustentar', o: 'Terceiro e quarto rituais. Faça uma revisão de dez minutos ao fim do mês: o que os três números nos fizeram decidir que não teríamos decidido? A resposta diz se o painel está vivo.' }
+  ];
+  const SINAL_FUNCIONOU = 'Ao fim de 30 dias, o teste não é se os números melhoraram: trinta dias é pouco para isso. O teste é se alguma decisão foi tomada por causa do painel, e se a pauta da reunião encolheu porque itens deixaram de voltar. Se as duas coisas aconteceram, o modelo mudou.';
+
+  const ERROS = [
+    { t: 'Começar com oito indicadores', p: 'A vontade de cobrir tudo é compreensível e é o jeito mais rápido de abandonar o painel. Três é pouco de propósito: é o número que cabe na cabeça de todo mundo durante a semana, não só durante a reunião.' },
+    { t: 'Deixar o dono da empresa ser dono dos três', p: 'Se você é o dono dos três indicadores, o painel virou o seu relatório pessoal e o sinal 4 continua exatamente onde estava. Pelo menos dois dos três precisam ter outro nome ao lado.' },
+    { t: 'Transformar o ritual em prestação de contas', p: 'Se estar fora do rumo custa constrangimento público, as pessoas vão gerenciar a aparência do número em vez do número. O tom da segunda ou terceira semana define isso, e quem define o tom é você.' },
+    { t: 'Trocar de indicador na terceira semana', p: 'O número ficou feio e a reação natural é concluir que o indicador estava errado. Às vezes está. Mas antes de trocar, dê seis semanas: é o tempo mínimo para distinguir indicador ruim de diagnóstico incômodo.' },
+    { t: 'Não escrever nada na hora', p: 'Sem registro imediato, a semana seguinte começa com uma discussão sobre o que foi combinado. Duas ocorrências disso e o ritual perde a credibilidade que leva meses para reconstruir.' }
+  ];
+
+  const CONTATO = { email: 'contato@nordflux.co', pdf: 'pdfs/nordflux-diagnostico-4-sinais.pdf' };
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOTOR DO QUESTIONÁRIO
+     ═══════════════════════════════════════════════════════════════ */
+  const STEPS = [
+    { id: 'contexto', eyebrow: 'Etapa 1 de 6 · Contexto', titulo: 'Que tipo de negócio é a sua empresa?', sub: 'Usamos isso para sugerir os indicadores de exemplo no resultado. Use como referência, não como resposta.', tipo: 'single' },
+    ...SINAIS.map(s => ({ id: 's' + s.n, eyebrow: 'Etapa ' + (s.n + 1) + ' de 6 · Sinal ' + s.n, titulo: s.titulo, sub: 'Com que frequência cada situação abaixo acontece na sua empresa hoje?', tipo: 'sinal', sinal: s })),
+    { id: 'painel', eyebrow: 'Etapa 6 de 6 · O painel e o ritual', titulo: 'O que já existe para dirigir a empresa toda semana?', sub: 'Três indicadores, um de cada tipo, um ritual de 30 minutos e dois ou três sinais vitais. Responda pelo que existe de fato, não pelo que está planejado.', tipo: 'painel' }
+  ];
+
+  const respostas = { tipo: null, sinais: { 1: [null, null, null], 2: [null, null, null], 3: [null, null, null], 4: [null, null, null] }, painel: {} };
+  let stepIdx = 0;
+  let lead = null;
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  function showScreen(id) {
+    document.querySelectorAll('.dm-screen').forEach(s => s.classList.toggle('active', s.id === id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderStep() {
+    const step = STEPS[stepIdx];
+    $('progressLabel').textContent = 'Etapa ' + (stepIdx + 1) + ' de ' + STEPS.length;
+    $('progressBar').style.width = ((stepIdx) / STEPS.length * 100) + '%';
+    $('quizError').classList.remove('show');
+    $('btnPrev').style.visibility = stepIdx === 0 ? 'hidden' : 'visible';
+    $('btnNext').innerHTML = (stepIdx === STEPS.length - 1 ? 'Calcular diagnóstico' : 'Continuar') +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+
+    let html = '<div class="dm-step-head"><p class="eyebrow">' + esc(step.eyebrow) + '</p><h2>' + esc(step.titulo) + '</h2><p>' + esc(step.sub) + '</p></div>';
+
+    if (step.tipo === 'single') {
+      html += '<div class="dm-q' + (respostas.tipo ? ' answered' : '') + '" data-q="tipo"><div class="dm-opts cols-3">';
+      TIPOS_NEGOCIO.forEach(t => {
+        const checked = respostas.tipo === t.id ? ' checked' : '';
+        html += '<div class="dm-opt dm-opt-big"><input type="radio" name="tipo" id="tipo-' + t.id + '" value="' + t.id + '"' + checked + '><label for="tipo-' + t.id + '">' + esc(t.t) + (t.resultado ? '<small>ex.: ' + esc(t.resultado) + '</small>' : '<small>sem exemplo pré-definido</small>') + '</label></div>';
+      });
+      html += '</div></div>';
+    }
+
+    if (step.tipo === 'sinal') {
+      const s = step.sinal;
+      html += '<div class="dm-scale-legend"><span>Nunca</span><span>Sempre</span></div>';
+      s.afirmacoes.forEach((a, i) => {
+        const cur = respostas.sinais[s.n][i];
+        html += '<div class="dm-q' + (cur !== null ? ' answered' : '') + '" data-q="s' + s.n + '-' + i + '"><p class="dm-q-text"><span class="dm-q-num">' + s.n + '.' + (i + 1) + '</span>' + esc(a) + '</p><div class="dm-opts">';
+        ESCALA.forEach(o => {
+          const id = 's' + s.n + '-' + i + '-' + o.v;
+          html += '<div class="dm-opt"><input type="radio" name="s' + s.n + '-' + i + '" id="' + id + '" value="' + o.v + '"' + (cur === o.v ? ' checked' : '') + '><label for="' + id + '">' + esc(o.t) + '</label></div>';
+        });
+        html += '</div></div>';
+      });
+    }
+
+    if (step.tipo === 'painel') {
+      PAINEL.forEach((p, i) => {
+        const cur = respostas.painel[p.id];
+        html += '<div class="dm-q' + (cur !== undefined ? ' answered' : '') + '" data-q="p-' + p.id + '"><p class="dm-q-text"><span class="dm-q-num">' + (i + 1) + '</span>' + esc(p.pergunta) + '</p><div class="dm-opts cols-3">';
+        ESCALA_PAINEL.forEach(o => {
+          const id = 'p-' + p.id + '-' + o.v;
+          html += '<div class="dm-opt"><input type="radio" name="p-' + p.id + '" id="' + id + '" value="' + o.v + '"' + (cur === o.v ? ' checked' : '') + '><label for="' + id + '">' + esc(o.t) + '</label></div>';
+        });
+        html += '</div></div>';
+      });
+    }
+
+    $('stepMount').innerHTML = html;
+    $('stepMount').querySelectorAll('input[type=radio]').forEach(inp => {
+      inp.addEventListener('change', () => {
+        inp.closest('.dm-q').classList.add('answered');
+        $('quizError').classList.remove('show');
+        saveAnswer(inp.name, inp.value);
+      });
+    });
+  }
+
+  function saveAnswer(name, value) {
+    if (name === 'tipo') { respostas.tipo = value; return; }
+    let m = name.match(/^s(\d)-(\d)$/);
+    if (m) { respostas.sinais[m[1]][m[2]] = Number(value); return; }
+    m = name.match(/^p-(.+)$/);
+    if (m) { respostas.painel[m[1]] = Number(value); }
+  }
+
+  function stepComplete() {
+    const step = STEPS[stepIdx];
+    if (step.tipo === 'single') return !!respostas.tipo;
+    if (step.tipo === 'sinal') return respostas.sinais[step.sinal.n].every(v => v !== null);
+    if (step.tipo === 'painel') return PAINEL.every(p => respostas.painel[p.id] !== undefined);
+    return true;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CÁLCULO
+     ═══════════════════════════════════════════════════════════════ */
+  function calcular() {
+    const sinais = SINAIS.map(s => {
+      const pts = respostas.sinais[s.n].reduce((a, b) => a + b, 0);
+      const status = pts >= REGRAS.limiarPresente ? 'presente' : (pts >= REGRAS.limiarAtencao ? 'atencao' : 'ausente');
+      return { ...s, pts, status };
+    });
+    const presentes = sinais.filter(s => s.status === 'presente');
+    const contagem = presentes.length;
+    const leitura = contagem <= 1 ? LEITURAS.baixa : (contagem === 2 ? LEITURAS.media : LEITURAS.alta);
+    const painelPts = PAINEL.reduce((a, p) => a + (respostas.painel[p.id] || 0), 0);
+    const tipo = TIPOS_NEGOCIO.find(t => t.id === respostas.tipo) || TIPOS_NEGOCIO[TIPOS_NEGOCIO.length - 1];
+    const ordenados = [...sinais].sort((a, b) => b.pts - a.pts || a.n - b.n);
+    return { sinais, presentes, contagem, leitura, painelPts, tipo, prioridade: ordenados[0], ordenados };
+  }
+
+  const STATUS_LABEL = { presente: 'Presente', atencao: 'Ponto de atenção', ausente: 'Não se manifesta' };
+
+  /* ═══════════════════════════════════════════════════════════════
+     GATE (captação)
+     ═══════════════════════════════════════════════════════════════ */
+  function prepararGate(r) {
+    $('pvSinais').textContent = r.contagem + ' de 4';
+    $('fTipo').value = r.tipo.t;
+    $('fLeitura').value = r.leitura.faixa + ' · ' + r.leitura.titulo;
+    $('fSinais').value = r.presentes.length ? r.presentes.map(s => 'Sinal ' + s.n + ' (' + s.curto + ')').join('; ') : 'Nenhum';
+    $('fPontSinais').value = r.sinais.map(s => 'S' + s.n + '=' + s.pts + '/' + REGRAS.maxSinal).join(' ');
+    $('fPontPainel').value = r.painelPts + '/' + REGRAS.maxPainel;
+    $('fRespostas').value = JSON.stringify(respostas);
+    $('protoNotice').classList.toggle('show', location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  }
+
+  function formatarTelefone(v) {
+    const d = v.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d;
+    if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESULTADO
+     ═══════════════════════════════════════════════════════════════ */
+  function renderResult(r) {
+    const primeiroNome = lead.nome.trim().split(/\s+/)[0];
+    let h = '';
+
+    // Cabeçalho
+    h += '<div class="dm-result-head"><div><p class="eyebrow">Diagnóstico de maturidade · ' + esc(lead.empresa) + '</p>' +
+      '<h1>' + esc(primeiroNome) + ', ' + (r.contagem === 0 ? 'nenhum dos 4 sinais' : (r.contagem === 1 ? 'um dos 4 sinais' : r.contagem + ' dos 4 sinais')) + ' <em>' + (r.contagem === 1 ? 'está presente' : (r.contagem === 0 ? 'está presente' : 'estão presentes')) + '</em> na ' + esc(lead.empresa) + '.</h1>' +
+      '<p>' + esc(RESSALVA) + '</p></div>' +
+      '<div class="dm-score"><div class="dm-score-n">' + r.contagem + '<span style="font-size:.45em;-webkit-text-fill-color:var(--fg-muted)">/4</span></div><div class="dm-score-l">sinais presentes</div></div></div>';
+
+    // Leitura
+    h += '<section class="dm-sec"><p class="eyebrow">Leitura do resultado · ' + esc(r.leitura.faixa) + '</p><h2>' + esc(r.leitura.titulo) + '</h2><p class="sub">' + esc(r.leitura.texto) + '</p>';
+    h += '<div class="dm-signals">';
+    r.sinais.forEach(s => {
+      h += '<div class="dm-sig ' + s.status + '"><span class="dm-sig-num">Sinal ' + s.n + '</span><span class="dm-sig-title">' + esc(s.titulo) + '</span>' +
+        '<div class="dm-bar"><i style="width:' + Math.round(s.pts / REGRAS.maxSinal * 100) + '%"></i></div>' +
+        '<div class="dm-sig-status"><span class="dm-badge ' + s.status + '">' + STATUS_LABEL[s.status] + '</span><span>' + s.pts + ' de ' + REGRAS.maxSinal + '</span></div></div>';
+    });
+    h += '</div>';
+    if (r.contagem >= 2) h += '<div class="dm-callout accent"><div class="dm-callout-label">Antes de agir</div><p>' + esc(ALERTA_LEITURA) + '</p></div>';
+    h += '</section>';
+
+    // Por onde começar: sinais em ordem de intensidade
+    h += '<section class="dm-sec"><p class="eyebrow">Por onde começar</p><h2>' + (r.contagem > 0 ? 'Comece pelo sinal mais forte: o ' + r.prioridade.n : 'Nenhum sinal dominante. Acompanhe o mais próximo de aparecer') + '</h2>' +
+      '<p class="sub">Para cada sinal: por que ele acontece, um teste de 5 minutos que você faz sozinho, com o que já tem, e a primeira correção aplicável na próxima semana.</p>';
+    r.ordenados.forEach((s, i) => {
+      const open = i === 0 || s.status === 'presente';
+      h += '<div class="dm-detail' + (open ? ' open' : '') + (i === 0 && s.status !== 'ausente' ? ' prioridade' : '') + '">' +
+        '<div class="dm-detail-head" data-toggle><div class="dm-detail-n">' + s.n + '</div><div class="dm-detail-t">' + esc(s.titulo) + '<small>' + STATUS_LABEL[s.status] + ' · ' + s.pts + ' de ' + REGRAS.maxSinal + (i === 0 && s.status !== 'ausente' ? ' · Prioridade' : '') + '</small></div>' +
+        '<svg class="dm-detail-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>' +
+        '<div class="dm-detail-body">' +
+        '<h4>Por que acontece</h4><p>' + esc(s.porque) + '</p>' +
+        '<h4>O teste de 5 minutos</h4><div class="dm-test"><div class="dm-test-label">Faça sozinho, com o que já tem</div><p>' + esc(s.teste) + '</p></div>' +
+        '<h4>A primeira correção · aplicável já na próxima semana</h4><ul class="dm-list">' + s.correcao.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>' +
+        '<div class="dm-muda"><b>O que muda quando funciona</b>' + esc(s.muda) + '</div>' +
+        '</div></div>';
+    });
+    h += '</section>';
+
+    // Painel dos 3 indicadores
+    const indicadoresOk = PAINEL.slice(0, 3).filter(p => (respostas.painel[p.id] || 0) === 2).length;
+    const tituloPainel = indicadoresOk === 3 ? 'O painel dos 3 indicadores está instalado' : (indicadoresOk === 0 ? 'O painel dos 3 indicadores ainda não existe' : 'O painel dos 3 indicadores está incompleto: ' + indicadoresOk + ' de 3');
+    h += '<section class="dm-sec"><p class="eyebrow">O mecanismo · ' + r.painelPts + ' de ' + REGRAS.maxPainel + ' pontos</p><h2>' + tituloPainel + '</h2>' +
+      '<p class="sub">Não são os três indicadores mais importantes da empresa. São um de cada tipo, e é a combinação dos três tipos que faz o painel funcionar. É o único mecanismo que atinge os quatro sinais por tabela.</p>';
+    h += '<div class="dm-painel">';
+    PAINEL.slice(0, 3).forEach(p => {
+      const v = respostas.painel[p.id] || 0;
+      const ex = p.id === 'execucao' ? r.tipo.execucao : r.tipo[p.id];
+      h += '<div class="dm-pcard' + (v < 2 ? ' falta' : '') + '"><span class="dm-badge ' + (v === 2 ? 'ausente' : (v === 1 ? 'atencao' : 'presente')) + '">' + (v === 2 ? 'Existe' : (v === 1 ? 'Em parte' : 'Falta')) + '</span><strong>' + esc(p.tipo) + '</strong><p>' + esc(p.descricao) + '</p>' +
+        (ex ? '<div class="ex"><small>Exemplo · ' + esc(r.tipo.t) + '</small>' + esc(ex) + '</div>' : '<div class="ex"><small>Exemplo</small>O indicador certo é o que a sua equipe consegue medir toda semana sem virar um projeto.</div>') + '</div>';
+    });
+    h += '</div>';
+    h += '<div class="dm-callout"><div class="dm-callout-label">As três regras que valem para os três</div><p>' + esc(TRES_REGRAS) + '</p></div>';
+
+    // Tabela de exemplos por tipo de negócio
+    h += '<h4 style="font-family:var(--font-display);font-size:var(--text-md-sm);font-weight:600;margin:32px 0 12px">Exemplos por tipo de negócio</h4><div class="dm-table-wrap"><table class="dm-table"><thead><tr><th>Tipo de negócio</th><th>Resultado</th><th>Causa</th><th>Execução</th></tr></thead><tbody>';
+    TIPOS_NEGOCIO.filter(t => t.resultado).forEach(t => {
+      h += '<tr' + (t.id === r.tipo.id ? ' class="hl"' : '') + '><td>' + esc(t.t) + '</td><td>' + esc(t.resultado) + '</td><td>' + esc(t.causa) + '</td><td>' + esc(t.execucao) + '</td></tr>';
+    });
+    h += '</tbody></table></div><p style="color:var(--fg-muted);font-size:var(--text-sm);margin-top:12px">A coluna de execução é igual para todos. O indicador de execução mede o modelo de gestão, e o modelo de gestão é o mesmo independentemente do que a empresa vende.</p>';
+    h += '</section>';
+
+    // Ritual (se não existe ou parcial)
+    const ritualV = respostas.painel.ritual || 0;
+    h += '<section class="dm-sec"><p class="eyebrow">O que sustenta o painel</p><h2>' + (ritualV === 2 ? 'O ritual de 30 minutos: confira contra o roteiro' : 'O ritual de 30 minutos que falta instalar') + '</h2>' +
+      '<p class="sub">Um painel sem ritual vira planilha abandonada em duas semanas. O ritual é o que transforma os três números em decisão, e ele cabe em meia hora, toda segunda-feira, no mesmo horário.</p>';
+    h += '<div class="dm-table-wrap"><table class="dm-table"><thead><tr><th>Tempo</th><th>Bloco</th><th>O que acontece</th></tr></thead><tbody>';
+    RITUAL.forEach(x => { h += '<tr><td>' + esc(x.t) + '</td><td style="color:var(--fg-primary)">' + esc(x.b) + '</td><td>' + esc(x.o) + '</td></tr>'; });
+    h += '</tbody></table></div>';
+    h += '<ul class="dm-list" style="margin-top:22px"><li>Sempre no mesmo dia e horário. Ritual que se remarca deixa de ser ritual e vira reunião.</li><li>Sem apresentação e sem slides. O painel já existe; ninguém precisa produzir material para lê-lo.</li><li>Não é o espaço de resolver problema complexo: é o espaço de identificar e encaminhar.</li><li>Alguém escreve durante a reunião, não depois. Ata feita de memória perde a metade que importa.</li></ul>';
+    h += '</section>';
+
+    // Sinais vitais (se não existem ou parcial)
+    const vitaisV = respostas.painel.vitais || 0;
+    if (vitaisV < 2) {
+      h += '<section class="dm-sec"><p class="eyebrow">O que o painel não vê</p><h2>Os sinais vitais</h2>' +
+        '<p class="sub">Os três indicadores existem para dirigir. Os sinais vitais existem para não atropelar. Indicador é o que você quer melhorar. Sinal vital é o que você não pode violar enquanto melhora. Por isso não recebe meta de crescimento: fica ao lado, silencioso, até o dia em que precisa gritar.</p>';
+      h += '<div class="dm-table-wrap"><table class="dm-table"><thead><tr><th>Sinal vital</th><th>O que revela</th><th>Forma do limite</th></tr></thead><tbody>';
+      SINAIS_VITAIS.forEach(x => { h += '<tr><td>' + esc(x.s) + '</td><td>' + esc(x.r) + '</td><td>' + esc(x.l) + '</td></tr>'; });
+      h += '</tbody></table></div><p style="color:var(--fg-muted);font-size:var(--text-sm);margin-top:12px">Escolha dois ou três, não seis. E defina os limites agora, enquanto nenhum está perto de ser cruzado: limite definido no meio da crise não é limite, é negociação.</p></section>';
+    }
+
+    // Plano de 30 dias
+    h += '<section class="dm-sec"><p class="eyebrow">Sair do papel</p><h2>Os primeiros 30 dias</h2><p class="sub">Um caminho possível, desenhado para caber numa empresa que continua operando enquanto muda.</p>';
+    h += '<div class="dm-table-wrap"><table class="dm-table"><thead><tr><th>Quando</th><th>Foco</th><th>O que fazer</th></tr></thead><tbody>';
+    PLANO_30.forEach(x => { h += '<tr><td>' + esc(x.q) + '</td><td style="color:var(--fg-primary)">' + esc(x.f) + '</td><td>' + esc(x.o) + '</td></tr>'; });
+    h += '</tbody></table></div>';
+    h += '<div class="dm-callout accent"><div class="dm-callout-label">O sinal de que funcionou</div><p>' + esc(SINAL_FUNCIONOU) + '</p></div></section>';
+
+    // Cinco erros
+    h += '<section class="dm-sec"><p class="eyebrow">Antecipando o previsível</p><h2>Os cinco erros das primeiras semanas</h2><p class="sub">Todos os cinco são armadilhas de boa intenção. Reconhecê-las antes economiza um mês.</p><div class="dm-erros">';
+    ERROS.forEach((e, i) => { h += '<div class="dm-erro"><b>' + (i + 1) + '</b><strong>' + esc(e.t) + '</strong><p>' + esc(e.p) + '</p></div>'; });
+    h += '</div></section>';
+
+    // CTA
+    h += '<div class="dm-cta"><p class="eyebrow centered">Conversa sem compromisso</p>' +
+      '<p class="dm-cta-quote">“Travar em algum dos três indicadores é o resultado esperado, e é uma informação útil.”</p>' +
+      '<p>Normalmente o campo que trava aponta o sinal mais forte da sua empresa. Me conte qual foi: respondo pessoalmente, sem apresentação comercial.</p>' +
+      '<div class="dm-cta-actions">' +
+      '<a class="btn btn-primary" href="mailto:' + CONTATO.email + '?subject=' + encodeURIComponent('Diagnóstico de maturidade · ' + lead.empresa) + '&body=' + encodeURIComponent('Olá, Thiago. Fiz o diagnóstico de maturidade da ' + lead.empresa + ' e o resultado foi: ' + r.contagem + ' de 4 sinais presentes (' + r.leitura.titulo + '). O que travou foi: ') + '">Falar com a NordFlux</a>' +
+      '<a class="btn btn-outline" href="' + CONTATO.pdf + '" download>Baixar o material completo (PDF)</a>' +
+      '</div>' +
+      '<p style="margin-top:36px;color:var(--fg-muted);font-size:var(--text-sm)">Thiago Pandolfo · Sócio-fundador · NordFlux Consultoria · ' + CONTATO.email + '</p></div>';
+
+    $('resultMount').innerHTML = h;
+    $('resultMount').querySelectorAll('[data-toggle]').forEach(el => el.addEventListener('click', () => el.parentElement.classList.toggle('open')));
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     EVENTOS
+     ═══════════════════════════════════════════════════════════════ */
+  $('btnStart').addEventListener('click', () => { stepIdx = 0; renderStep(); showScreen('screen-quiz'); });
+
+  $('btnPrev').addEventListener('click', () => {
+    if (stepIdx === 0) { showScreen('screen-intro'); return; }
+    stepIdx--; renderStep(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  $('btnNext').addEventListener('click', () => {
+    if (!stepComplete()) {
+      $('quizError').classList.add('show');
+      const pend = $('stepMount').querySelector('.dm-q:not(.answered)');
+      if (pend) pend.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (stepIdx < STEPS.length - 1) { stepIdx++; renderStep(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    prepararGate(calcular());
+    showScreen('screen-lead');
+  });
+
+  $('telefone').addEventListener('input', e => { e.target.value = formatarTelefone(e.target.value); });
+
+  $('leadForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const nome = (data.get('nome') || '').trim();
+    const email = (data.get('email') || '').trim();
+    const empresa = (data.get('empresa') || '').trim();
+    const cargo = (data.get('cargo') || '').trim();
+    const telefone = (data.get('telefone') || '').trim();
+    const err = $('leadError');
+
+    if (!nome || !email || !empresa || !cargo || !telefone) { err.textContent = 'Preencha todos os campos para ver o diagnóstico.'; err.classList.add('show'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Confira o e-mail: parece incompleto.'; err.classList.add('show'); return; }
+    if (telefone.replace(/\D/g, '').length < 10) { err.textContent = 'Confira o telefone: use DDD e número (10 ou 11 dígitos).'; err.classList.add('show'); return; }
+    err.classList.remove('show');
+
+    const btn = $('leadSubmit'); const label = btn.querySelector('.btn-label'); const original = label.textContent;
+    btn.disabled = true; label.textContent = 'Enviando…';
+
+    const local = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (local) {
+      console.log('[protótipo] payload que seria enviado ao Netlify Forms:', Object.fromEntries(data.entries()));
+    } else {
+      try {
+        const body = new URLSearchParams();
+        for (const [k, v] of data.entries()) body.append(k, v);
+        await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() });
+      } catch (_) { /* segue para o resultado mesmo se a captura falhar */ }
+    }
+
+    btn.disabled = false; label.textContent = original;
+    lead = { nome, email, empresa, cargo, telefone };
+    renderResult(calcular());
+    showScreen('screen-result');
+  });
+
+  $('btnPrint').addEventListener('click', () => window.print());
+  $('btnRestart').addEventListener('click', () => {
+    respostas.tipo = null; [1, 2, 3, 4].forEach(n => respostas.sinais[n] = [null, null, null]); respostas.painel = {};
+    stepIdx = 0; renderStep(); showScreen('screen-quiz');
+  });
+  </script>
+</body>
+</html>

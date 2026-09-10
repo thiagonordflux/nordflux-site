@@ -39,16 +39,27 @@
   [headers.values]
     Content-Disposition = "attachment"
 
-# ─── URL amigável: nordflux.co/360 e /x360 ─────────────
+# ─── URL amigável: nordflux.co/diagnostico ─────────────
+[[redirects]]
+  from = "/diagnostico"
+  to = "/diagnostico.html"
+  status = 200
+
+# ─── Antiga página X360 fora do ar: redireciona para o diagnóstico ──
 [[redirects]]
   from = "/360"
-  to = "/360.html"
-  status = 200
+  to = "/diagnostico"
+  status = 301
 
 [[redirects]]
   from = "/x360"
-  to = "/360.html"
-  status = 200
+  to = "/diagnostico"
+  status = 301
+
+[[redirects]]
+  from = "/360.html"
+  to = "/diagnostico"
+  status = 301
 
 # ─── URLs amigáveis: nordflux.co/gm e /gm/obrigado ─────
 [[redirects]]

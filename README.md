@@ -12,6 +12,7 @@ Estático, sem build, pronto pra Netlify.
 nordflux-site/
 ├── index.html              ← Home
 ├── materiais.html          ← Repositório de PDFs (com gate de senha + captura de e-mail)
+├── diagnostico.html        ← Autodiagnóstico de maturidade de gestão (18 perguntas, gate de lead, resultado)
 ├── netlify.toml            ← Headers, cache, redirects
 ├── README.md               ← Este arquivo
 ├── css/
@@ -36,6 +37,7 @@ O Netlify captura automaticamente as submissões dos formulários abaixo. Ver tu
 |---|---|---|
 | `contato` | `index.html` → seção Contato | nome, e-mail, empresa, assunto, mensagem |
 | `mailing-list` | `materiais.html` → modal de download | nome, e-mail, empresa, cargo, material |
+| `diagnostico-maturidade` | `diagnostico.html` → gate antes do resultado | nome, e-mail, telefone, empresa, cargo + ocultos: tipo_negocio, leitura, sinais_presentes, pontuacao_sinais, pontuacao_painel, respostas (JSON) |
 
 **Senha de acesso aos PDFs:** `nordflux2026` (validada no JS do cliente — gate leve, não segurança real).
 
